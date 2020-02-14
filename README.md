@@ -284,7 +284,7 @@ Se você quiser aprender mais sobre a API do _Mercado Livre_, veja a [documenta�
 
 ## Requisitos do projeto
 
-Aqui encontram-se os requisitos do projeto. Para acessar a descrição completa das demandas, veja o quadro _Kanban_ disponibilizado para o seu grupo na [aba Projects](https://github.com/tryber/sd-02-week14-project-frontend-online-store-1/projects) do repositório.
+Aqui encontram-se os requisitos do projeto. Para acessar a descrição completa das demandas, veja o quadro _Kanban_ disponibilizado para o seu grupo na [aba Projects](https://github.com/tryber/sd-02-week14-project-frontend-online-store-3/projects) do repositório.
 
 ⚠️ Lembre-se que o seu projeto só será avaliado se estiver passando pelos _checks_ do **CodeClimate**.
 
@@ -381,9 +381,9 @@ Aqui encontram-se os requisitos do projeto. Para acessar a descrição completa 
 ### ANTES DE COMEÇAR A DESENVOLVER:
 
 1. Clone o repositório
-  * `git clone git@github.com:tryber/sd-02-week14-project-frontend-online-store-1.git`.
+  * `git clone git@github.com:tryber/sd-02-week14-project-frontend-online-store-3.git`.
   * Entre na pasta do repositório que você acabou de clonar:
-    * `cd sd-02-week14-project-frontend-online-store-1`
+    * `cd sd-02-week14-project-frontend-online-store-3`
 
 2. Instale as dependências e inicialize o projeto
   * Instale as dependências:
@@ -416,13 +416,13 @@ Aqui encontram-se os requisitos do projeto. Para acessar a descrição completa 
   * Usando o exemplo anterior: `git push -u origin criar-campo-de-busca`
 
 6. Crie um novo `Pull Request` _(PR)_
-  * Vá até a página de _Pull Requests_ do [repositório no GitHub](https://github.com/tryber/sd-02-week14-project-frontend-online-store-1/pulls)
+  * Vá até a página de _Pull Requests_ do [repositório no GitHub](https://github.com/tryber/sd-02-week14-project-frontend-online-store-3/pulls)
   * Clique no botão verde _"New pull request"_
   * Clique na caixa de seleção _"Compare"_ e escolha a branch do grupo e a sua branch **com atenção**
   * Clique no botão verde _"Create pull request"_
   * Adicione uma descrição para o _Pull Request_ e clique no botão verde _"Create pull request"_
   * **Não se preocupe em preencher mais nada por enquanto!**
-  * Volte até a [página de _Pull Requests_ do repositório](https://github.com/tryber/sd-02-week14-project-frontend-online-store-1/pulls) e confira que o seu _Pull Request_ está criado
+  * Volte até a [página de _Pull Requests_ do repositório](https://github.com/tryber/sd-02-week14-project-frontend-online-store-3/pulls) e confira que o seu _Pull Request_ está criado
 
 7. Após finalizar as alterações do seu _Pull Request_:
   * Vá até a página **DO SEU** _Pull Request_, adicione a label de _"code-review"_ e marque as pessoas do seu grupo
@@ -456,13 +456,13 @@ Aqui encontram-se os requisitos do projeto. Para acessar a descrição completa 
 Para **"entregar"** seu projeto, siga os passos a seguir:
 
   * Abram um novo `Pull Request` (_PR_), dessa vez para todo o projeto do grupo, comparando com a branch `master`
-  * Vá até a página de _Pull Requests_ do [repositório no GitHub](https://github.com/tryber/sd-02-week14-project-frontend-online-store-1/pulls)
+  * Vá até a página de _Pull Requests_ do [repositório no GitHub](https://github.com/tryber/sd-02-week14-project-frontend-online-store-3/pulls)
   * Clique no botão verde _"New pull request"_
   * Clique na caixa de seleção _"Compare"_ e escolha **com atenção** a `master` como a branch base e a branch do seu grupo (`master-group-x`) como a branch a ser comparada
   * Clique no botão verde _"Create pull request"_
   * Adicione uma descrição para o _Pull Request_ e clique no botão verde _"Create pull request"_
   * **Não se preocupe em preencher mais nada por enquanto!**
-  * Volte até a [página de _Pull Requests_ do repositório](https://github.com/tryber/sd-02-week14-project-frontend-online-store-1/pulls) e confira que o _Pull Request_ do seu grupo está criado
+  * Volte até a [página de _Pull Requests_ do repositório](https://github.com/tryber/sd-02-week14-project-frontend-online-store-3/pulls) e confira que o _Pull Request_ do seu grupo está criado
   * No menu à direita, clique no _link_ **"Assignees"** e escolha **os usuários do seu grupo**
 
 Se ainda houver alguma dúvida sobre como entregar seu projeto, entre em contato através do canal do _Slack_.
