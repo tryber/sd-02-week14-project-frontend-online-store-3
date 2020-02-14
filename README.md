@@ -451,24 +451,6 @@ Aqui encontram-se os requisitos do projeto. Para acessar a descrição completa 
 
 ---
 
-### DEPOIS DE TERMINAR O DESENVOLVIMENTO
-
-Para **"entregar"** seu projeto, siga os passos a seguir:
-
-  * Abram um novo `Pull Request` (_PR_), dessa vez para todo o projeto do grupo, comparando com a branch `master`
-  * Vá até a página de _Pull Requests_ do [repositório no GitHub](https://github.com/tryber/sd-02-week14-project-frontend-online-store-3/pulls)
-  * Clique no botão verde _"New pull request"_
-  * Clique na caixa de seleção _"Compare"_ e escolha **com atenção** a `master` como a branch base e a branch do seu grupo (`master-group-x`) como a branch a ser comparada
-  * Clique no botão verde _"Create pull request"_
-  * Adicione uma descrição para o _Pull Request_ e clique no botão verde _"Create pull request"_
-  * **Não se preocupe em preencher mais nada por enquanto!**
-  * Volte até a [página de _Pull Requests_ do repositório](https://github.com/tryber/sd-02-week14-project-frontend-online-store-3/pulls) e confira que o _Pull Request_ do seu grupo está criado
-  * No menu à direita, clique no _link_ **"Assignees"** e escolha **os usuários do seu grupo**
-
-Se ainda houver alguma dúvida sobre como entregar seu projeto, entre em contato através do canal do _Slack_.
-
----
-
 ### REVISANDO UM PULL REQUEST
 
 ⚠⚠⚠
