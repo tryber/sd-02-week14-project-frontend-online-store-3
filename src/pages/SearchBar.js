@@ -51,7 +51,7 @@ class SearchBar extends Component {
       <label htmlFor="categories">
         Categorias
         <select id="categories" onChange={this.onSelectedCategoryChange}>
-          {categories.map(({ name, id }) => (<option key={id} value={name}> {name}</option>)
+          {categories.map(({ name, id }) => (<option key={id} value={name}>{name}</option>),
           )}
         </select>
       </label>
