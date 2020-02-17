@@ -16,6 +16,11 @@ class SearchBar extends Component {
     this.onSelectedCategoryChange = this.onSelectedCategoryChange.bind(this);
   }
 
+  componentDidMount() {
+    productAPI.getCategories()
+      .then((categories) => this.setState({ categories }));
+  }
+
   onSearchTextChange(event) {
     if (event.keyCode === 13) {
       const { value } = event.target;
@@ -25,14 +30,9 @@ class SearchBar extends Component {
 
   onSelectedCategoryChange(event) {
     const { value } = event.target;
-    this.setState({ categorySelected: value }
-    );
+    this.setState({ categorySelected: value });
   }
 
-  componentDidMount() {
-    productAPI.getCategories()
-      .then(categories => this.setState({ categories: categories }))
-  }
 
   createInputSearch() {
     return (
@@ -46,17 +46,13 @@ class SearchBar extends Component {
     );
   }
   createCategories() {
-    const { categories } = this.state
+    const { categories } = this.state;
     return (
       <label htmlFor="categories">
         Categorias
         <select id="categories" onChange={this.onSelectedCategoryChange}>
-          {categories.map(({ name, id }) => {
-            return (
-              <option key={id} value={name}> {name}</option>
-            )
-          })}
-
+          {categories.map(({ name, id }) => (<option key={id} value={name}> {name}</option>)
+          )}
         </select>
       </label>
     );
