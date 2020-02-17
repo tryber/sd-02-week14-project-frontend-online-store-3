@@ -1,0 +1,9 @@
+* {
+  box-sizing: border-box;
+}
+
+.cards-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+

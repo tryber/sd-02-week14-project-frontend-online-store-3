@@ -12,15 +12,15 @@ class ProductList extends Component {
   }
 
   componentDidUpdate() {
-    const { categorieId, query } = this.props;
+    const { categoryId, query } = this.props;
 
-    productAPI.getCategorie(categorieId)
+    productAPI.getCategory(categoryId)
       .then((products) => this.setState({ products: products.results }));
 
     productAPI.getQuery(query)
       .then((products) => this.setState({ products: products.results }));
 
-    productAPI.getQueryNCategorie(categorieId, query)
+    productAPI.getQueryNCategory(categoryId, query)
       .then((products) => this.setState({ products: products.results }));
   }
 
