@@ -14,11 +14,13 @@ function App() {
           <Route exact path="/" component={SearchBar} />
           <Route exact path="/products/:id" component={ProductDetails} />
           <Route exact path="/shoppingcart" component={ShoppingCart} />
-          <Route component={NotFound} />
+          <Route component={NotFound} /> 
         </Switch>
       </main>
     </BrowserRouter>
   );
 }
+
+// aasasas
 
 export default App;
