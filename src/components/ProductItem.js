@@ -25,9 +25,9 @@ class ProductItem extends Component {
 }
 
 ProductItem.propTypes = {
-  title: PropTypes.string,
-  thumbnail: PropTypes.string,
-  price: PropTypes.number,
-}
+  title: PropTypes.string.isRequired,
+  thumbnail: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+};
 
 export default ProductItem;

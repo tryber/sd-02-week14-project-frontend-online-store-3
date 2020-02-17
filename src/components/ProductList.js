@@ -30,7 +30,7 @@ class ProductList extends Component {
     if (!products) return <div>Digite algum termo de pesquisa ou escolha uma categoria.</div>;
     return (
       <div>
-        {products.map((product) => {
+        {products.map(product => {
           return (
             <ProductItem
               title={product.title}
@@ -45,8 +45,8 @@ class ProductList extends Component {
 }
 
 ProductList.propTypes = {
-  categoryId: PropTypes.string,
-  query: PropTypes.string,
-}
+  categoryId: PropTypes.string.isRequired,
+  query: PropTypes.string.isRequired,
+};
 
 export default ProductList;
