@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import ProductItem from './ProductItem';
 import * as productAPI from '../services/productAPI';
 
@@ -29,18 +30,23 @@ class ProductList extends Component {
     if (!products) return <div>Digite algum termo de pesquisa ou escolha uma categoria.</div>;
     return (
       <div>
-        {products.map(product => {
+        {products.map((product) => {
           return (
             <ProductItem
               title={product.title}
               thumbnail={product.thumbnail}
               price={product.price}
             />
-          )
+          );
         })}
       </div>
     );
   }
+}
+
+ProductList.propTypes = {
+  categoryId: PropTypes.string,
+  query: PropTypes.string,
 }
 
 export default ProductList;
