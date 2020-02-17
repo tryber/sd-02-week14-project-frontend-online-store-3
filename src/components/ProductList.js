@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import ProductItem from './ProductItem';
+import ProductItem from './ProductItem';
 import * as productAPI from '../services/productAPI';
 
 class ProductList extends Component {
@@ -11,35 +11,33 @@ class ProductList extends Component {
     };
   }
 
-  componentDidMount() {
-    // const { categorieId, query } = this.props;
+  componentDidUpdate() {
+    const { categorieId, query } = this.props;
 
-    productAPI.getCategorie('MLB5672')
-      .then((products) => {
-        const allProducts = products.results;
-        this.setState({ products: allProducts })
-      })
-      // .then((products) => products.results.map(product => {
-      //   const { title, thumbnail, price } = product;
-      //   this.setState(state => {
-      //     console.log([...state.products, title, thumbnail, price]);
-      //   })
-      // }));
+    productAPI.getCategorie(categorieId)
+      .then((products) => this.setState({ products: products.results }));
 
-    // productAPI.getQuery(query)
-    //   .then((products) => this.setState({ products }));
+    productAPI.getQuery(query)
+      .then((products) => this.setState({ products: products.results }));
 
-    // productAPI.getQueryNCategorie(categorieId, query)
-    //   .then((products) => this.setState({ products }));
+    productAPI.getQueryNCategorie(categorieId, query)
+      .then((products) => this.setState({ products: products.results }));
   }
 
   render() {
     const { products } = this.state;
-    if (!products) return <div>vazio</div>;
+    if (!products) return <div>Digite algum termo de pesquisa ou escolha uma categoria.</div>;
     return (
       <div>
-        {products.map(product => <li>{product.title}</li>)}
-        {/* {products.map(product => <ProductItem product={product} />)} */}
+        {products.map(product => {
+          return (
+            <ProductItem
+              title={product.title}
+              thumbnail={product.thumbnail}
+              price={product.price}
+            />
+          )
+        })}
       </div>
     );
   }
