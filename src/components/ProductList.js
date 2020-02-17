@@ -30,15 +30,13 @@ class ProductList extends Component {
     if (!products) return <div>Digite algum termo de pesquisa ou escolha uma categoria.</div>;
     return (
       <div>
-        {products.map(product => {
-          return (
-            <ProductItem
-              title={product.title}
-              thumbnail={product.thumbnail}
-              price={product.price}
-            />
-          );
-        })}
+        {products.map((product) =>
+          <ProductItem
+            title={product.title}
+            thumbnail={product.thumbnail}
+            price={product.price}
+          />
+        )}
       </div>
     );
   }
