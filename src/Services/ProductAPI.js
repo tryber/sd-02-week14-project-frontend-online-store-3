@@ -1,3 +1,4 @@
-const Products;
 
-export 
+export const getCategories = () => {
+  
+}
