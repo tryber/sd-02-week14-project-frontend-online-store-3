@@ -1,24 +1,38 @@
 import React, { Component } from 'react';
+// import ProductList from '../components/ProductList'
+import * as productAPI from '../services/productAPI';
 
 class SearchBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchText: '',
-      selectedCategory: '',
+      query: '',
+      categorySelected: '',
+      categories: [],
     };
     this.createInputSearch = this.createInputSearch.bind(this);
-    this.createGender = this.createGender.bind(this);
+    this.createCategories = this.createCategories.bind(this);
+    this.onSearchTextChange = this.onSearchTextChange.bind(this);
+    this.onSelectedCategoryChange = this.onSelectedCategoryChange.bind(this);
   }
 
   onSearchTextChange(event) {
-    const { value } = event.target;
-    this.setState({ searchText: value });
+    if (event.keyCode === 13) {
+      const { value } = event.target;
+      this.setState({ query: value });
+    }
   }
-  
+
   onSelectedCategoryChange(event) {
     const { value } = event.target;
-    this.setState({ selectedCategory: value });
+    this.setState({ categorySelected: value }
+    );
+  }
+
+  componentDidMount() {
+    productAPI.getCategories()
+      .then(categories => this.setState({ categories: categories }))
+  }
 
   createInputSearch() {
     return (
@@ -26,44 +40,45 @@ class SearchBar extends Component {
         <input
           id="text"
           type="text"
-          value={searchText}
-          onKeyUp={onSearchTextChange}
+          onKeyUp={this.onSearchTextChange}
         />
       </label>
     );
   }
-
-  createCategory() {    
+  createCategories() {
+    const { categories } = this.state
     return (
-      <label htmlFor="category">
+      <label htmlFor="categories">
         Categorias
-        <select
-          id="gender"
-          value={selectedCategory}
-          onChange={onSelectedCategoryChange}
-        >
-          <option value="">Todos</option>
-          <option value="action">Ação</option>
-          <option value="comedy">Comédia</option>
-          <option value="thriller">Suspense</option>
+        <select id="categories" onChange={this.onSelectedCategoryChange}>
+          {categories.map(({ name, id }) => {
+            return (
+              <option key={id} value={name}> {name}</option>
+            )
+          })}
+
         </select>
       </label>
     );
   }
 
-
-    render() {
-      return (
-        <form>
+  render() {
+    return (
+      <div>
+        <div className="search-bar">
           {this.createInputSearch()}
-          <br />
-          {this.createCheckbox()}
-          <br />
-          {this.createGender()}
-          <br />
-        </form>
-      );
-    }
+        </div>
+        <div>
+          <div className="categories">
+            {this.createCategories()}
+          </div>
+          <div className="productList">
+            {/* <ProductList category={this.state.categorySelected} query={this.state.query} /> */}
+          </div>
+        </div>
+      </div>
+    );
   }
+}
 
-  export default SearchBar;
+export default SearchBar;
