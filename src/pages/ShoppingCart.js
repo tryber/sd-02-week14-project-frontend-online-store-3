@@ -11,32 +11,32 @@ class ShoppingCart extends React.Component {
         {
           title: 'Mouse',
           thumbnail: 'Imagem',
-          price: 'R$ 500,50'
+          price: 'R$ 500,50',
         },
         {
           title: 'Teclado',
           thumbnail: 'Imagem',
-          price: 'R$ 32,00'
+          price: 'R$ 32,00',
         },
         {
           title: 'Notebook',
           thumbnail: 'Imagem',
-          price: 'R$ 2.550,50'
-        }
+          price: 'R$ 2.550,50',
+        },
       ],
       product: {
         title: 'Nome produto',
         thumbnail: 'Imagem',
-        price: 'Preço'
+        price: 'Preço',
       }
-    }
+    };
   }
 
   createQtdButton() {
     return (
-      <div className='flex_qtd_container'>
+      <div className="flex_qtd_container">
         <div>Diminuir</div>
-        <input type='input' className='input_qtd' />
+        <input type="input" className="input_qtd" />
         <div>Aumentar</div>
       </div>
     )
@@ -54,7 +54,7 @@ class ShoppingCart extends React.Component {
     const { product } = this.state;
     const { title, thumbnail, price } = product;
     return (
-      <div className='flex_cart_container'>
+      <div className="flex_cart_container">
         <div>
           {this.createRemoveButton()}
         </div>
@@ -71,7 +71,7 @@ class ShoppingCart extends React.Component {
           {price}
         </div>
       </div>
-    )
+    );
   }
 
   totalPrice() {
@@ -82,15 +82,16 @@ class ShoppingCart extends React.Component {
       value = value.replace('.', '');
       value = value.replace(',', '');
       value = parseFloat(value);
-      return acc += value;
+      acc += value;
+      return acc;
     }, 0);
     totalPrice = new Intl.NumberFormat('pt-BR', {
       style: 'currency',
-      currency: 'BRL'
+      currency: 'BRL',
     }).format(totalPrice / 100);
     return (
       <div>Valor total da compra: {totalPrice}</div>
-    )
+    );
   }
 
   render() {
@@ -98,7 +99,7 @@ class ShoppingCart extends React.Component {
     if (isEmpty) {
       return (
         <div>
-          <Link to='/'>Voltar</Link>
+          <Link to="/">Voltar</Link>
           <div>
             {this.createProductInfos()}
           </div>
@@ -112,7 +113,7 @@ class ShoppingCart extends React.Component {
       <div>
         <p>Nao Vazio</p>
       </div>
-    )
+    );
   }
 }
 
