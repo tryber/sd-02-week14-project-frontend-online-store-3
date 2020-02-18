@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import ProductList from '../components/ProductList';
+import { Redirect } from 'react-router-dom';
 import * as productAPI from '../services/productAPI';
+import lupa from '../imgs/lupa.svg';
+import './SearchBar.css';
+
 
 class SearchBar extends Component {
   constructor(props) {
@@ -9,11 +13,14 @@ class SearchBar extends Component {
       query: '',
       categorySelected: '',
       categories: [],
+      searchTerm: '',
+      isShouldRedirect: false,
     };
     this.createInputSearch = this.createInputSearch.bind(this);
     this.createCategories = this.createCategories.bind(this);
     this.onSearchTextChange = this.onSearchTextChange.bind(this);
     this.onSelectedCategoryChange = this.onSelectedCategoryChange.bind(this);
+    this.onChangeRedirect = this.onChangeRedirect.bind(this);
   }
 
   componentDidMount() {
@@ -21,10 +28,18 @@ class SearchBar extends Component {
       .then((categories) => this.setState({ categories }));
   }
 
-  onSearchTextChange(event) {
-    if (event.keyCode === 13) {
-      const { value } = event.target;
-      this.setState({ query: value });
+  onChangeRedirect() {    
+    this.setState({
+      isShouldRedirect: true,
+    });
+  }
+
+  onSearchTextChange(event) { 
+    
+    if (event.keyCode === 13 || event.type === 'click') {
+      const { searchTerm } = this.state ;
+      this.setState({ query: searchTerm });
+      event.target.value = '';
     }
   }
 
@@ -39,13 +54,22 @@ class SearchBar extends Component {
 
   createInputSearch() {
     return (
-      <label htmlFor="text">
+      <div className="header">
+        <img src={lupa} alt="lupa" className="lupa" onClick={this.onSearchTextChange} />
+    
+        <label htmlFor="text">
         <input
           id="text"
           type="text"
+          onChange={(e) => this.setState({ searchTerm: e.target.value})}
           onKeyUp={this.onSearchTextChange}
+          className="input-search"
         />
       </label>
+      <div className="cart" onClick={this.onChangeRedirect}>
+        <p> 1 </p>                   
+      </div>        
+      </div>
     );
   }
   createCategories() {
@@ -62,17 +86,17 @@ class SearchBar extends Component {
   }
 
   render() {
+    const { query, isShouldRedirect, categorySelected } = this.state
+    if (isShouldRedirect) return <Redirect to="/banana"/>;
     return (
-      <div>
-        <div className="search-bar">
-          {this.createInputSearch()}
-        </div>
-        <div>
+      <div className="main-page">
+        {this.createInputSearch()}
+        <div className="main-content" >
           <div className="categories">
             {this.createCategories()}
           </div>
           <div className="productList">
-            <ProductList categoryId={this.state.categorySelected} query={this.state.query} />
+            <ProductList categoryId={categorySelected} query={query} />
           </div>
         </div>
       </div>
