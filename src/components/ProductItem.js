@@ -6,7 +6,7 @@ class ProductItem extends Component {
   render() {
     const { title, thumbnail, price } = this.props;
     return (
-      <div className="cards-list">
+      <div className="product-item">
         <div>
           {title}
         </div>
@@ -14,7 +14,7 @@ class ProductItem extends Component {
           <img src={thumbnail} alt={`imagem de um ${title}`} />
         </div>
         <div>
-          R$ {price}
+          {price}
         </div>
         <div>
           {/* <Link to={`/products/${id}`}>Ver detalhes</Link> */}
@@ -27,7 +27,7 @@ class ProductItem extends Component {
 ProductItem.propTypes = {
   title: PropTypes.string.isRequired,
   thumbnail: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
+  price: PropTypes.string.isRequired,
 };
 
 export default ProductItem;

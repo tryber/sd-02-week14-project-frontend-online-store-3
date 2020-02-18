@@ -1,5 +1,12 @@
-.cards-list {
-  box-sizing: border-box;
+.product-item {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  border: 1px solid black;
+  border-radius: 1rem;
+  padding: 1rem;
+  margin: 1rem;
+  width: 10rem;
+  height: 15rem;
+  text-align: center;
+  justify-content: space-around;
 }
