@@ -72,7 +72,7 @@ class SearchBar extends Component {
             {this.createCategories()}
           </div>
           <div className="productList">
-            <ProductList category={this.state.categorySelected} query={this.state.query} />
+            <ProductList categoryId={this.state.categorySelected} query={this.state.query} />
           </div>
         </div>
       </div>
