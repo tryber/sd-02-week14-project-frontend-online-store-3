@@ -1,12 +1,12 @@
 .product-item {
-  display: flex;
-  flex-direction: column;
   border: 1px solid black;
   border-radius: 1rem;
-  padding: 1rem;
-  margin: 1rem;
-  width: 10rem;
+  display: flex;
+  flex-direction: column;
   height: 15rem;
-  text-align: center;
   justify-content: space-around;
+  margin: 1rem;
+  padding: 1rem;
+  text-align: center;
+  width: 10rem;
 }

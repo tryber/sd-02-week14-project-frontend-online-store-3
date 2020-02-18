@@ -20,6 +20,7 @@ class ProductList extends Component {
       return productAPI.getQueryNCategory(categoryId, query)
         .then((products) => this.setState({ products: products.results }));
     }
+    return false;
   }
 
   render() {
