@@ -1,0 +1,19 @@
+.flex_cart_container {
+  display: flex;
+  justify-content: space-between;
+  width: 30%;
+}
+
+.flex_qtd_container {
+  display: flex;
+  justify-content: space-between;
+  width: 10%;
+}
+
+.input_qtd {
+  align-self: center;
+  border-radius: 100%;
+  height: 20px;
+  text-align: center;
+  width: 20px;
+}
