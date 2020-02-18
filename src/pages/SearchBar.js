@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import ProductList from '../components/ProductList'
+import ProductList from '../components/ProductList';
 import * as productAPI from '../services/productAPI';
 
 class SearchBar extends Component {
@@ -30,7 +30,10 @@ class SearchBar extends Component {
 
   onSelectedCategoryChange(event) {
     const { value } = event.target;
-    this.setState({ categorySelected: value });
+    this.setState((state) => {
+      const categorySelected = state.categories.find((item) => item.name === value).id;
+      return ({ categorySelected });
+    });
   }
 
 
