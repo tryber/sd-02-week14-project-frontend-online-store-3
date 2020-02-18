@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import ProductList from '../components/ProductList'
+import ProductList from '../components/ProductList';
 import * as productAPI from '../services/productAPI';
 
 class SearchBar extends Component {
@@ -69,7 +69,7 @@ class SearchBar extends Component {
             {this.createCategories()}
           </div>
           <div className="productList">
-            {/* <ProductList category={this.state.categorySelected} query={this.state.query} /> */}
+            <ProductList category={this.state.categorySelected} query={this.state.query} />
           </div>
         </div>
       </div>
