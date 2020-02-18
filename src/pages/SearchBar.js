@@ -30,7 +30,10 @@ class SearchBar extends Component {
 
   onSelectedCategoryChange(event) {
     const { value } = event.target;
-    this.setState({ categorySelected: value });
+    this.setState((state) => {
+      const categorySelected = state.categories.find((item) => item.name === value).id;
+      return ({ categorySelected });
+    });
   }
 
 
