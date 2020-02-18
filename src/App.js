@@ -1,12 +1,12 @@
 import React from 'react';
-import SearchBar from './pages/SearchBar';
+import Checkout from './pages/Checkout';
 import './App.css';
 // import ProductList from './components/ProductList';
 
 function App() {
   return (
     <div>
-      <SearchBar />
+      <Checkout />
     </div>
   );
 }
