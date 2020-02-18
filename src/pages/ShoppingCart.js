@@ -33,10 +33,10 @@ class ShoppingCart extends React.Component {
   }
 
   createQtdButton() {
-    this.x = "Diminuir"
+    this.x = 'Diminuir';
     return (
       <div className="flex_qtd_container">
-        <div>{x}</div>
+        <div>{this.x}</div>
         <input type="input" className="input_qtd" />
         <div>Aumentar</div>
       </div>
@@ -44,10 +44,10 @@ class ShoppingCart extends React.Component {
   }
 
   createRemoveButton() {
-    this.x = 'x'
+    this.x = 'x';
     return (
       <div>
-        <div>{x}</div>
+        <div>{this.x}</div>
       </div>
     );
   }
