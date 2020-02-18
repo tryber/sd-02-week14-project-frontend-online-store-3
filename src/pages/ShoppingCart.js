@@ -28,26 +28,28 @@ class ShoppingCart extends React.Component {
         title: 'Nome produto',
         thumbnail: 'Imagem',
         price: 'Preço',
-      }
+      },
     };
   }
 
   createQtdButton() {
+    this.state;
     return (
       <div className="flex_qtd_container">
         <div>Diminuir</div>
         <input type="input" className="input_qtd" />
         <div>Aumentar</div>
       </div>
-    )
+    );
   }
 
   createRemoveButton() {
+    this.state;
     return (
       <div>
         <div>x</div>
       </div>
-    )
+    );
   }
 
   createProductInfos() {
@@ -82,7 +84,7 @@ class ShoppingCart extends React.Component {
       value = value.replace('.', '');
       value = value.replace(',', '');
       value = parseFloat(value);
-      acc += value;
+      acc = acc + value;
       return acc;
     }, 0);
     totalPrice = new Intl.NumberFormat('pt-BR', {
