@@ -33,7 +33,7 @@ class ShoppingCart extends React.Component {
   }
 
   createQtdButton() {
-    this.state;
+    this.state.isEmpty;
     return (
       <div className="flex_qtd_container">
         <div>Diminuir</div>
@@ -44,7 +44,7 @@ class ShoppingCart extends React.Component {
   }
 
   createRemoveButton() {
-    this.state;
+    this.state.isEmpty;
     return (
       <div>
         <div>x</div>
@@ -84,7 +84,7 @@ class ShoppingCart extends React.Component {
       value = value.replace('.', '');
       value = value.replace(',', '');
       value = parseFloat(value);
-      acc = acc + value;
+      acc += value;
       return acc;
     }, 0);
     totalPrice = new Intl.NumberFormat('pt-BR', {
