@@ -19,6 +19,9 @@ class ProductItem extends Component {
         <div>
           {/* <Link to={`/products/${id}`}>Ver detalhes</Link> */}
         </div>
+        <div>
+          <button>Adicionar ao carrinho</button>
+        </div>
       </div>
     );
   }
