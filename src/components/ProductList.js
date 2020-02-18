@@ -37,6 +37,7 @@ class ProductList extends Component {
               currency: 'BRL',
               minimumFractionDigits: 2,
             }).format(product.price)}
+            id={product.id}
           />,
         )}
       </div>

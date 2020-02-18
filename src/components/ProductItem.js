@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './ProductItem.css';
+import ButtonAddCart from './AddCartInitialPage';
 
 class ProductItem extends Component {
   render() {
@@ -20,7 +21,7 @@ class ProductItem extends Component {
           {/* <Link to={`/products/${id}`}>Ver detalhes</Link> */}
         </div>
         <div>
-          <button>Adicionar ao carrinho</button>
+          <ButtonAddCart product={this.props} />
         </div>
       </div>
     );
