@@ -5,7 +5,6 @@ import './ShoppingCart.css';
 class ShoppingCart extends React.Component {
   constructor(props) {
     super(props);
-
     const products = [
       {
         id: 1,
@@ -29,11 +28,8 @@ class ShoppingCart extends React.Component {
         quantity: 3,
       },
     ];
-
     localStorage.setItem('products', JSON.stringify(products));
-
     const teste = JSON.parse(localStorage.getItem('products'));
-
     this.state = {
       isEmpty: true,
       productsArr: teste,
@@ -55,9 +51,9 @@ class ShoppingCart extends React.Component {
     this.x = 'Diminuir';
     return (
       <div className="flex_qtd_container">
-        <div onClick={() => this.changeQuantity('down', id)}>{this.x}</div>
+        <button type="button" onClick={() => this.changeQuantity('down', id)}>{this.x}</button>
         <input type="input" className="input_qtd" value={quantity} />
-        <div onClick={() => this.changeQuantity('up', id)}>Aumentar</div>
+        <button type="button" onClick={() => this.changeQuantity('up', id)}>Aumentar</button>
       </div>
     );
   }
@@ -74,7 +70,7 @@ class ShoppingCart extends React.Component {
     this.x = 'x';
     return (
       <div>
-        <div id={id} onClick={this.removeFromCart}>{this.x}</div>
+        <button type="button" id={id} onClick={this.removeFromCart}>{this.x}</button>
       </div>
     );
   }
