@@ -14,9 +14,17 @@ class AddCartInitialPage extends Component {
 
   addItemToCart() {
     const { product } = this.props;
-    const { title, thumbnail, realPrice, id } = product;
-    this.setState((state) => ({ products: [...state.products, product] }));
-    localStorage.setItem(id, JSON.stringify({ title, thumbnail, realPrice }));
+    if (!localStorage.products) {
+      return localStorage.setItem("products", JSON.stringify([product]));
+    }
+    const products = JSON.parse(localStorage.getItem("products"));
+    if (localStorage.products.includes(product.id)) {
+      const index = products.findIndex(item => item.id === product.id);
+      console.log(index)
+      products[index].quantity += 1;
+      return localStorage.setItem("products", JSON.stringify(products));
+    }
+    localStorage.setItem("products", JSON.stringify([...products, product]));
   }
 
   render() {
