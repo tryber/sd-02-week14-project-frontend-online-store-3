@@ -14,7 +14,7 @@ class PaymentMethod extends Component {
     const { paymentMethod, addPaymentMethod } = this.props;
     return (
       <div className="radio">
-        <label>
+        <label htmlFor="payment-methods">
           <input
             type="radio"
             value={option}
@@ -33,7 +33,7 @@ class PaymentMethod extends Component {
     return (
       <form>
         <div className="radio">
-          <label>
+          <label htmlFor="payment-methods">
             <input
               type="radio"
               value="boleto"

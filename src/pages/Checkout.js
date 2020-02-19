@@ -46,8 +46,9 @@ class Checkout extends Component {
     });
   }
 
-  handleSubmit = (event) => {
-    const { clientInfo, paymentMethod, cart, totalPrice } = this.state;
+  handleSubmit(event) {
+    const {
+      clientInfo, paymentMethod, cart, totalPrice } = this.state;
     localStorage.setItem('checkout', JSON.stringify([clientInfo, paymentMethod, cart, totalPrice]))
     alert('Parabéns, você contraiu uma dívida de: ' + this.state.totalPrice);
     event.preventDefault();
