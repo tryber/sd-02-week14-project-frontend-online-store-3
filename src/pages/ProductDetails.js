@@ -8,10 +8,12 @@ class ProductDetails extends Component {
 
     this.state = {
       attributes: [],
+      productCount: 1,
     };
 
-    this.incrementCount = this.incrementCount.bind(this);
     this.decreaseCount = this.decreaseCount.bind(this);
+    this.incrementCount = this.incrementCount.bind(this);
+    this.addCart = this.addCart.bind(this);
   }
 
   componentDidMount() {
@@ -24,18 +26,41 @@ class ProductDetails extends Component {
           ({ attributes: [...state.attributes, `${element.name}: ${element.value_name}`] }))));
   }
 
-  // incrementCount() {
+  decreaseCount() {
+    const { productCount } = this.state;
+    if (productCount <= 1) return false;
+    this.setState({ productCount: productCount - 1 });
+  }
 
-  // }
+  incrementCount() {
+    const { productCount } = this.state;
+    this.setState({ productCount: productCount + 1 });
+  }
 
-  // decreaseCount() {
-
-  // }
+  addCart() {
+    const { product } = this.props.location.state;
+    const { productCount } = this.state;
+    if (!localStorage.products) {
+      product.quantity += productCount - 1;
+      localStorage.setItem('products', JSON.stringify([product]));
+      return this.setState({ productCount: 1 });
+    }
+    const products = JSON.parse(localStorage.getItem('products'));
+    if (localStorage.products.includes(product.id)) {
+      const index = products.findIndex((item) => item.id === product.id);
+      products[index].quantity += productCount;
+      localStorage.setItem('products', JSON.stringify(products));
+      return this.setState({ productCount: 1 });
+    }
+    product.quantity += productCount - 1;
+    localStorage.setItem('products', JSON.stringify([...products, product]));
+    return this.setState({ productCount: 1 });
+  }
 
   render() {
     const { product } = this.props.location.state;
     const { title, thumbnail, price } = product;
-    const { attributes } = this.state;
+    const { attributes, productCount } = this.state;
     return (
       <div>
         <div>
@@ -51,9 +76,9 @@ class ProductDetails extends Component {
         <div>
           <p>Quantidade</p>
           <button onClick={this.decreaseCount}>-</button>
-          {/* <p></p> */}
+          <p>{productCount}</p>
           <button onClick={this.incrementCount}>+</button>
-          <button>Adicionar ao carrinho</button>
+          <button onClick={this.addCart}>Adicionar ao carrinho</button>
         </div>
       </div>
     );
