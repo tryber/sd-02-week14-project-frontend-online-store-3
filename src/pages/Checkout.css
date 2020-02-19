@@ -1,0 +1,18 @@
+.checkout-page{
+  padding:20px;
+}
+
+.review-cart{
+  border: 1px solid black;
+  padding: 20px;
+}
+
+.client-info{
+  border: 1px solid black;
+  padding: 20px;
+}
+
+.payment-method{
+  border: 1px solid black;
+  padding: 20px;
+}
