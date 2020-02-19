@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
-class ButtonAddCart extends Component {
+class AddCartInitialPage extends Component {
   constructor(props) {
     super(props);
 
@@ -14,8 +15,8 @@ class ButtonAddCart extends Component {
   addItemToCart() {
     const { product } = this.props;
     const { title, thumbnail, price, id } = product;
-    this.setState(state => ({ products: [...state.products, product] }))
-    localStorage.setItem(id, JSON.stringify({title, thumbnail, price}));
+    this.setState((state) => ({ products: [...state.products, product] }));
+    localStorage.setItem(id, JSON.stringify({ title, thumbnail, price }));
   }
 
   render() {
@@ -23,8 +24,12 @@ class ButtonAddCart extends Component {
       <div>
         <button onClick={this.addItemToCart}>Adicionar ao carrinho</button>
       </div>
-    )
+    );
   }
 }
 
-export default ButtonAddCart;
+AddCartInitialPage.propTypes = {
+  product: PropTypes.string.isRequired,
+}
+
+export default AddCartInitialPage;
