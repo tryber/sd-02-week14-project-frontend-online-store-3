@@ -1,18 +1,17 @@
-.checkout-page{
-  padding:20px;
+.checkout-page {
+  padding: 20px;
 }
 
-.review-cart{
+.client-info {
   border: 1px solid black;
   padding: 20px;
 }
 
-.client-info{
+.payment-method {
   border: 1px solid black;
   padding: 20px;
 }
-
-.payment-method{
+.review-cart {
   border: 1px solid black;
   padding: 20px;
 }

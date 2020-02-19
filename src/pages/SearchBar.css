@@ -1,27 +1,27 @@
 .header {
+  align-items: center;
   display: flex;
   justify-content: center;
-  align-items: center;
 }
 
 .input-search {
   width: 600px;
 }
 
-.cart{
-  color: white;
+.cart {
   background-image: url('../imgs/cart.svg');
-  width: 50px;
+  color: white;
   height: 50px;
+  width: 50px;
 }
 
 .cart p {
   background-color: rgb(161, 10, 10);
-  text-align: center;
   border-radius: 100%;
   float: right;
-  width: 18px;
-  height: 18px;
-  margin-top: 0px;
   font-weight: 800;
+  height: 18px;
+  margin-top: 0;
+  text-align: center;
+  width: 18px;
 }
