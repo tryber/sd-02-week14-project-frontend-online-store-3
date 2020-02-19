@@ -34,7 +34,7 @@ class SearchBar extends Component {
     });
   }
 
-  onSearchTextChange = (event) => {
+  onSearchTextChange(event) {
     if (event.keyCode === 13 || event.type === 'click') {
       const { searchTerm } = this.state;
       this.setState({ query: searchTerm });     
