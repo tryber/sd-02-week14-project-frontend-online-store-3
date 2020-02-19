@@ -5,7 +5,7 @@ import card from '../imgs/creditcard.svg';
 
 class PaymentMethod extends Component {
   constructor(props) {
-    super(props);    
+    super(props);
     this.renderPaymentMethod = this.renderPaymentMethod.bind(this);
     this.createOption = this.createOption.bind(this);
   }
@@ -15,13 +15,17 @@ class PaymentMethod extends Component {
     return (
       <div className="radio">
         <label>
-          <input type="radio" value={option}
+          <input
+            type="radio"
+            value={option}
             checked={paymentMethod === option}
-            onChange={e => addPaymentMethod(e.target.value)} />
-          {option} <img src={card} />
+            onChange={(e) => addPaymentMethod(e.target.value)}
+          />
+          {option}
+          <img src={card} alt="cartão de crédito" />
         </label>
       </div>
-    )
+    );
   }
 
   renderPaymentMethod() {
@@ -30,17 +34,21 @@ class PaymentMethod extends Component {
       <form>
         <div className="radio">
           <label>
-            <input type="radio" value="boleto"
+            <input
+              type="radio"
+              value="boleto"
               checked={paymentMethod === 'boleto'}
-              onChange={e => addPaymentMethod(e.target.value)} />
-            Boleto <img src={barCode} />
+              onChange={(e) => addPaymentMethod(e.target.value)}
+            />
+            Boleto
+            <img src={barCode} alt="código de barras" />
           </label>
         </div>
         {this.createOption('Visa')}
         {this.createOption('MasterCard')}
         {this.createOption('Elo')}
       </form>
-    )
+    );
   }
 
   render() {
@@ -49,8 +57,13 @@ class PaymentMethod extends Component {
         <h2>Método de Pagamento</h2>
         {this.renderPaymentMethod()}
       </div>
-    )
+    );
   }
 }
 
-export default PaymentMethod
+PaymentMethod.propTypes = {
+  paymentMethod: PropTypes.string.isRequired,
+  addPaymentMethod: PropTypes.func.isRequired,
+};
+
+export default PaymentMethod;

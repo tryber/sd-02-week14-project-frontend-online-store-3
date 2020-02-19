@@ -1,28 +1,43 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React from 'react';
 
-function ReviewCart (props){
-  const { cart, totalPrice } = props
+function ReviewCart(props) {
+  const { cart, totalPrice } = props;
   return (
     <div className="review-cart">
       <h2>Revise seus Produtos</h2>
       <table className="shoppingCart">
         <tbody>
-          {cart.map(({ thumbnail, title, quantity, price, id }) => {
-            return (
-              <tr key={id}>
-                <td><img src={thumbnail} /></td>
-                <td>{title}</td>
-                <td>{quantity}</td>
-                <td>{price}</td>
-              </tr>
-            )
-          })}
+          {cart.map(({
+            thumbnail, title, quantity, price, id,
+          }) => (
+            <tr key={id}>
+              <td><img src={thumbnail} alt="imagem do produto" /></td>
+              <td>{title}</td>
+              <td>{quantity}</td>
+              <td>{price}</td>
+            </tr>
+          ))}
         </tbody>
       </table>
-      <h2>Total: {totalPrice} </h2>
+      <h2>
+        Total:
+        {totalPrice}
+      </h2>
     </div>
-  )
+  );
 }
+ReviewCart.propTypes = {
+  cart: PropTypes.shape({
+    title: PropTypes.string,
+    thumbnail: PropTypes.string,
+    quantity: PropTypes.string,
+    price: PropTypes.number,
+    price: PropTypes.string,
+  }).isRequired,
+};
+  
+  PropTypes.func.isRequired,
+};
 
-export default ReviewCart
+export default ReviewCart;
