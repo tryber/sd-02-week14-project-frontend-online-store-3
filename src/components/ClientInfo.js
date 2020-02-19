@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import * as data from '../services/data';
+import estados from '../services/data';
 
 class ClientInfo extends Component {
   constructor(props) {
@@ -37,7 +37,7 @@ class ClientInfo extends Component {
           {this.createOption('text', 'Cidade', 'Cidade')}
           <select name="estado" onChange={(event) => addClientInfo(event)}>
             <option selected="selected">Estado</option>
-            {data.estados.map(({ id, sigla, nome }) => (
+            {estados.map(({ id, sigla, nome }) => (
               <option
                 key={id}
                 value={sigla}

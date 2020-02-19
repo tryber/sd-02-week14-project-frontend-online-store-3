@@ -27,17 +27,16 @@ function ReviewCart(props) {
     </div>
   );
 }
+
 ReviewCart.propTypes = {
   cart: PropTypes.shape({
     title: PropTypes.string,
     thumbnail: PropTypes.string,
     quantity: PropTypes.string,
     price: PropTypes.number,
-    price: PropTypes.string,
+    id: PropTypes.string,
   }).isRequired,
-};
-  
-  PropTypes.func.isRequired,
+  totalPrice: PropTypes.string.isRequired,
 };
 
 export default ReviewCart;
