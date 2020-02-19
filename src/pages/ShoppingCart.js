@@ -20,13 +20,6 @@ class ShoppingCart extends React.Component {
         price: 'R$ 32,00',
         quantity: 1,
       },
-      {
-        id: 3,
-        title: 'Notebook',
-        thumbnail: 'Imagem',
-        price: 'R$ 2.550,50',
-        quantity: 3,
-      },
     ];
     localStorage.setItem('products', JSON.stringify(products));
     const teste = JSON.parse(localStorage.getItem('products'));
