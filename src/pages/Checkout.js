@@ -14,19 +14,19 @@ class Checkout extends Component {
     this.state = {
       clientInfo: {},
       paymentMethod: '',
-      isShouldRedirect: false,      
+      isShouldRedirect: false,
+      cart: [{ title: 'lucas', thumbnail: 'zé', quantity: 2, price: 2, id: 's' }, { title: 'lucas', thumbnail: 'zé', quantity: 2, price: 2, id: 's' }],
+      totalPrice: 222,
     }
-    this.handleRedirect = this.handleRedirect.bind(this);
-    this.addPaymentMethod = this.addPaymentMethod.bind(this);
+
     this.addClientInfo = this.addClientInfo.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.renderReturnButton = this.renderReturnButton.bind(this); 
-  
+    this.addPaymentMethod = this.addPaymentMethod.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);   
+    this.handleRedirect = this.handleRedirect.bind(this);
   }
 
-  
-  addClientInfo(clientInfo) {           
-    const { name, value } = clientInfo.target; 
+  addClientInfo(clientInfo) {
+    const { name, value } = clientInfo.target;
     this.setState({
       clientInfo: {
         ...this.state.clientInfo,
@@ -35,43 +35,39 @@ class Checkout extends Component {
     }
     );
   }
-  
+
   addPaymentMethod(paymentMethod) {
     console.log(paymentMethod)
     this.setState((state) => ({ paymentMethod }))
   }
-  
+
   handleRedirect() {
     this.setState({
       isShouldRedirect: true,
     });
   }
+
   handleSubmit = (event) => {
-    //salvar no storage
-    
+    const { clientInfo, paymentMethod, cart, totalPrice} = this.state;
+    localStorage.setItem('checkout', JSON.stringify([clientInfo, paymentMethod, cart, totalPrice]))
     alert('Parabéns, você contraiu uma dívida de: ' + this.state.totalPrice);
     event.preventDefault();
     this.handleRedirect();
   }
-  renderReturnButton() {
-    return (
-      <div>
-        <img src={returnButton} onClick={this.handleRedirect} />
-      </div>
-    )
-  }
 
   render() {
-    const { isShouldRedirect, paymentMethod } = this.state
-    if (isShouldRedirect) return <Redirect to="/" />;
+    const { isShouldRedirect, paymentMethod, cart, totalPrice } = this.state;
+    if (isShouldRedirect)
+      return <Redirect to="/" />;
     return (
       <div className="checkout-page">
-        {this.renderReturnButton()}
-        <ReviewCart />
+        <div>
+          <img src={returnButton} onClick={this.handleRedirect} />
+        </div>
+        <ReviewCart cart={cart} totalPrice={totalPrice} />
         <ClientInfo addClientInfo={(event) => this.addClientInfo(event)} />
-        <PaymentMethod addPaymentMethod={this.addPaymentMethod} 
-        paymentMethod={paymentMethod} />
-
+        <PaymentMethod addPaymentMethod={this.addPaymentMethod}
+          paymentMethod={paymentMethod} />
         <div className='submit-button'>
           <button onClick={this.handleSubmit}>Comprar</button>
         </div>

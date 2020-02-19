@@ -1,21 +1,18 @@
-import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 
-class ReviewCart extends Component {
-
-renderReviewCart() {
-  const { cart } = this.state
-  const { totalPrice } = this.state
+function ReviewCart (props){
+  const { cart, totalPrice } = props
   return (
     <div className="review-cart">
       <h2>Revise seus Produtos</h2>
       <table className="shoppingCart">
         <tbody>
-          {cart.map(({ thumbnail, product, quantity, price }) => {
+          {cart.map(({ thumbnail, title, quantity, price, id }) => {
             return (
-              <tr key={product}>
+              <tr key={id}>
                 <td><img src={thumbnail} /></td>
-                <td>{product}</td>
+                <td>{title}</td>
                 <td>{quantity}</td>
                 <td>{price}</td>
               </tr>
@@ -26,13 +23,6 @@ renderReviewCart() {
       <h2>Total: {totalPrice} </h2>
     </div>
   )
-}
-
-
-render() {
-  return()
-
-}
 }
 
 export default ReviewCart
