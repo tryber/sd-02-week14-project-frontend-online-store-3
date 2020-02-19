@@ -28,16 +28,15 @@ class SearchBar extends Component {
       .then((categories) => this.setState({ categories }));
   }
 
-  onChangeRedirect() {    
+  onChangeRedirect() {
     this.setState({
       isShouldRedirect: true,
     });
   }
 
-  onSearchTextChange(event) { 
-    
+  onSearchTextChange(event) {
     if (event.keyCode === 13 || event.type === 'click') {
-      const { searchTerm } = this.state ;
+      const { searchTerm } = this.state;
       this.setState({ query: searchTerm });
       event.target.value = '';
     }
@@ -56,19 +55,19 @@ class SearchBar extends Component {
     return (
       <div className="header">
         <img src={lupa} alt="lupa" className="lupa" onClick={this.onSearchTextChange} />
-    
+
         <label htmlFor="text">
-        <input
-          id="text"
-          type="text"
-          onChange={(e) => this.setState({ searchTerm: e.target.value})}
-          onKeyUp={this.onSearchTextChange}
-          className="input-search"
-        />
-      </label>
-      <div className="cart" onClick={this.onChangeRedirect}>
-        <p> 1 </p>                   
-      </div>        
+          <input
+            id="text"
+            type="text"
+            onChange={(e) => this.setState({ searchTerm: e.target.value })}
+            onKeyUp={this.onSearchTextChange}
+            className="input-search"
+          />
+        </label>
+        <div className="cart" onClick={this.onChangeRedirect}>
+          <p> 1 </p>
+        </div>
       </div>
     );
   }
@@ -86,8 +85,8 @@ class SearchBar extends Component {
   }
 
   render() {
-    const { query, isShouldRedirect, categorySelected } = this.state
-    if (isShouldRedirect) return <Redirect to="/banana"/>;
+    const { query, isShouldRedirect, categorySelected } = this.state;
+    if (isShouldRedirect) return <Redirect to="/banana" />;
     return (
       <div className="main-page">
         {this.createInputSearch()}

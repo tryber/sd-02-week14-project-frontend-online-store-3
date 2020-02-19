@@ -1,14 +1,4 @@
-.header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.input-search {
-  width: 600px;
-}
-
-.cart{
+.cart {
   color: white;
   background-image: url('../imgs/cart.svg');
   width: 50px;
@@ -22,6 +12,15 @@
   float: right;
   width: 18px;
   height: 18px;
-  margin-top: 0px;
+  margin-top: 0;
   font-weight: 800;
+}
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input-search {
+  width: 600px;
 }
