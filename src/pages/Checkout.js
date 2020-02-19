@@ -10,17 +10,9 @@ class Checkout extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      formControls: {
-        nome: '',
-        cpf: '',
-        email: '',
-        telefone: '',
-        cep: '',
-        endereco: '',
-        complemento: '',
-        numero: '',
-        cidade: '',
-        estado: '',
+      formControls: { nome: '', cpf: '', email: '',
+        telefone: '', cep: '', endereco: '', complemento: '',
+        numero: '', cidade: '', estado: '',
       },
       paymentMethod: '',
       isShouldRedirect: false,
@@ -34,16 +26,13 @@ class Checkout extends Component {
     this.renderReturnButton = this.renderReturnButton.bind(this);
     this.renderReviewCart = this.renderReviewCart(this);
     this.renderClientInfo = this.renderClientInfo(this);
-    this.renderPaymentMethod = this.renderPaymentMethod.bind(this);
-    this.renderSubmitButton = this.renderSubmitButton.bind(this);
+    this.renderPaymentMethod = this.renderPaymentMethod.bind(this);    
   }
-
   handleRedirect() {    
     this.setState({
       isShouldRedirect: true,
     });
-  }
-  
+  }  
   handleForms = (event) => {
     const name = event.target.name;
     const value = event.target.value;
@@ -55,13 +44,11 @@ class Checkout extends Component {
     }
     );
   }
-
   handlePaymentMethod = (event) => {
     this.setState({
       paymentMethod: event.target.value
     });
   }  
-  
   handleSubmit = (event) => {
     //salvar no storage
     
@@ -69,7 +56,6 @@ class Checkout extends Component {
     event.preventDefault();
     this.handleRedirect();
   }
-
   renderReturnButton(){
     return (
       <div>
@@ -77,7 +63,6 @@ class Checkout extends Component {
       </div>
     )
   }
-
   renderReviewCart() {
     const { cart } = this.state
     const { totalPrice } = this.state
@@ -102,7 +87,6 @@ class Checkout extends Component {
       </div>
     )
   }
-
 renderClientInfo() {
   return (
     <div className="client-info">
@@ -196,7 +180,6 @@ renderClientInfo() {
     </div>
   )
 }
-
 renderPaymentMethod() {
   return (
     <div className="payment-method">
@@ -238,16 +221,6 @@ renderPaymentMethod() {
     </div>
   )
 }
-
-renderSubmitButton(){
-  return (
-    <div className='submit-button'>
-      <button onClick={this.handleSubmit}>Comprar</button>
-    </div>
-  )
-}
-
-
 render() {
   const { isShouldRedirect } = this.state
   if (isShouldRedirect) return <Redirect to="/"/>;
@@ -257,12 +230,12 @@ render() {
       {this.renderReviewCart}
       {this.renderClientInfo}
       {this.renderPaymentMethod()}
-      {this.renderSubmitButton()}
+      <div className='submit-button'>
+      <button onClick={this.handleSubmit}>Comprar</button>
+    </div>
     </div>
   )
 }
-
 }
-
 
 export default Checkout
