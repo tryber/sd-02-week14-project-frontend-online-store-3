@@ -92,7 +92,12 @@ class ShoppingCart extends React.Component {
       currency: 'BRL',
     }).format(totalPrice / 100);
     return (
-      <div>Valor total da compra: {totalPrice}</div>
+      <div>
+        Valor total da compra:
+        {
+          totalPrice
+        }
+      </div>
     );
   }
 
