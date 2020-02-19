@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import ProductList from '../components/ProductList';
 import { Redirect } from 'react-router-dom';
+import ProductList from '../components/ProductList';
 import * as productAPI from '../services/productAPI';
 import lupa from '../imgs/lupa.svg';
 import './SearchBar.css';
@@ -28,17 +28,16 @@ class SearchBar extends Component {
       .then((categories) => this.setState({ categories }));
   }
 
-  onChangeRedirect() {
+  onChangeRedirect = () => {
     this.setState({
       isShouldRedirect: true,
     });
   }
 
-  onSearchTextChange(event) {
+  onSearchTextChange = (event) => {
     if (event.keyCode === 13 || event.type === 'click') {
       const { searchTerm } = this.state;
-      this.setState({ query: searchTerm });
-      event.target.value = '';
+      this.setState({ query: searchTerm });     
     }
   }
 
