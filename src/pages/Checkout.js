@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
-import PaymentMethod from '../components/PaymentMethod'
+import PaymentMethod from '../components/PaymentMethod';
+import ClientInfo from '../components/ClientInfo';
 import returnButton from '../imgs/return.svg';
 import './Checkout.css';
 import * as data from '../services/data'
@@ -86,71 +87,7 @@ class Checkout extends Component {
       </div>
     )
   }
-  renderClientInfo() {
-    return (
-      <div className="client-info">
-        <h2>Informações do Comprador</h2>
-        <form>
-          <input type="text"
-            name="nome"
-            placeholder="Nome Completo"
-            onChange={this.handleForms}
-          />
-          <input type="number"
-            name="cpf"
-            placeholder="CPF"
-            onChange={this.handleForms}
-          />
-          <input type="email"
-            name="email"
-            placeholder="Email"
-            onChange={this.handleForms}
-          />
-          <input type="number"
-            name="telefone"
-            placeholder="Telefone"
-            onChange={this.handleForms}
-          />
-          <input type="number"
-            name="cep"
-            placeholder="CEP"
-            onChange={this.handleForms}
-          />
-          <input type="text"
-            name="endereco"
-            placeholder="Endereço"
-            onChange={this.handleForms}
-          />
-          <input type="text"
-            name="complemento"
-            placeholder="Complemento"
-            onChange={this.handleForms}
-          />
-          <input type="number"
-            name="numero"
-            placeholder="Número"
-            onChange={this.handleForms}
-          />
-          <input type="text"
-            name="cidade"
-            placeholder="Cidade"
-            onChange={this.handleForms}
-          />
-          <select name="estado" onChange={this.handleForms}>
-            <option selected="selected">Estado</option>
-            {data.estados.map(({ id, sigla, nome }) => <option
-              key={id}
-              value={sigla}
-            >
-              {nome}
-            </option>
-            )}
-          </select>
-
-        </form>
-      </div>
-    )
-  }
+  
   
   render() {
     const { isShouldRedirect, paymentMethod } = this.state
@@ -163,7 +100,6 @@ class Checkout extends Component {
         {this.renderClientInfo}
 
         <PaymentMethod getPayment={this.addPaymentMethod} paymentMethod={paymentMethod} />
- 
         <div className='submit-button'>
           <button onClick={this.handleSubmit}>Comprar</button>
         </div>
