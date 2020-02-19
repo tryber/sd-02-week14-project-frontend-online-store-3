@@ -13,12 +13,6 @@ class ProductItem extends Component {
           {title}
         </div>
         <div>
-          <img src={thumbnail} alt={`imagem de um ${title}`} />
-        </div>
-        <div>
-          {price}
-        </div>
-        <div>
           <Link
             to={{
               pathname: `/products/${id}`,
@@ -26,7 +20,12 @@ class ProductItem extends Component {
                 product: this.props,
               },
             }}
-          >Ver detalhes</Link>
+          >
+            <img src={thumbnail} alt={`imagem de um ${title}`} />
+          </Link>
+        </div>
+        <div>
+          {price}
         </div>
         <div>
           <AddCartInitialPage product={this.props} />
