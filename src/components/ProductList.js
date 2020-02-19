@@ -38,6 +38,8 @@ class ProductList extends Component {
               minimumFractionDigits: 2,
             }).format(product.price)}
             id={product.id}
+            productInfo={this.props}
+            key={product.id}
           />,
         )}
       </div>
