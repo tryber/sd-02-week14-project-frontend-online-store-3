@@ -40,6 +40,7 @@ class ProductList extends Component {
             id={product.id}
             productInfo={this.props}
             key={product.id}
+            realPrice={product.price}
           />,
         )}
       </div>

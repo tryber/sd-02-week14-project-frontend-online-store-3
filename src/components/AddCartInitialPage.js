@@ -14,9 +14,9 @@ class AddCartInitialPage extends Component {
 
   addItemToCart() {
     const { product } = this.props;
-    const { title, thumbnail, price, id } = product;
+    const { title, thumbnail, realPrice, id } = product;
     this.setState((state) => ({ products: [...state.products, product] }));
-    localStorage.setItem(id, JSON.stringify({ title, thumbnail, price }));
+    localStorage.setItem(id, JSON.stringify({ title, thumbnail, realPrice }));
   }
 
   render() {
