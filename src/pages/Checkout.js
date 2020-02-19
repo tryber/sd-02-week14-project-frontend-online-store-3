@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import PaymentMethod from '../components/PaymentMethod';
 import ClientInfo from '../components/ClientInfo';
 import ReviewCart from '../components/ReviewCart';
-import returnButton from '../imgs/return.svg';
+// import returnButton from '../imgs/return.svg';
 import './Checkout.css';
 
 class Checkout extends Component {
@@ -24,11 +23,12 @@ class Checkout extends Component {
     this.handleRedirect = this.handleRedirect.bind(this);
   }
 
-  addClientInfo(clientInfo) {
-    const { name, value } = clientInfo.target;
+  addClientInfo(Info) {
+    const { name, value } = Info.target;
+    const { clientInfo } = this.state;
     this.setState({
       clientInfo: {
-        ...this.state.clientInfo,
+        ...clientInfo,
         [name]: value,
       },
     });
@@ -63,7 +63,7 @@ class Checkout extends Component {
     return (
       <div className="checkout-page">
         <div>
-          <img src={returnButton} onClick={this.handleRedirect} />
+          <button type="button" onClick={this.handleRedirect}> </button>
         </div>
         <ReviewCart cart={cart} totalPrice={totalPrice} />
         <ClientInfo addClientInfo={(event) => this.addClientInfo(event)} />
