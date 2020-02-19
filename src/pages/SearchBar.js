@@ -28,7 +28,7 @@ class SearchBar extends Component {
       .then((categories) => this.setState({ categories }));
   }
 
-  onChangeRedirect = () => {
+  onChangeRedirect() {
     this.setState({
       isShouldRedirect: true,
     });
