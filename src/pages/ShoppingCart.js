@@ -44,13 +44,10 @@ class ShoppingCart extends React.Component {
 
   changeQuantity(value, id) {
     const { productsArr } = this.state;
-    parseInt(id);
-    const teste = productsArr.findIndex(el => el.id === id)
-    if (value === 'up')
-      productsArr[teste].quantity += 1;
-    else
-      if (productsArr[teste].quantity > 1)
-        productsArr[teste].quantity -= 1;
+    parseInt(id, 10);
+    const teste = productsArr.findIndex((el) => el.id === id);
+    if (value === 'up') productsArr[teste].quantity += 1;
+    else if (productsArr[teste].quantity > 1) productsArr[teste].quantity -= 1;
     this.setState({ productsArr });
   }
 
@@ -67,8 +64,8 @@ class ShoppingCart extends React.Component {
 
   removeFromCart(event) {
     const { productsArr } = this.state;
-    const { id } = event.target
-    const items = productsArr.map(product => product.id).indexOf(parseInt(id));
+    const { id } = event.target;
+    const items = productsArr.map((product) => product.id).indexOf(parseInt(id, 10));
     productsArr.splice(items, 1);
     this.setState({ productsArr });
   }
@@ -105,7 +102,7 @@ class ShoppingCart extends React.Component {
   }
 
   totalPrice() {
-    const { productsArr } = this.state
+    const { productsArr } = this.state;
     let totalPrice = productsArr.reduce((acc, cur) => {
       const { price, quantity } = cur;
       let value = price.slice(3);
@@ -121,12 +118,15 @@ class ShoppingCart extends React.Component {
     }).format(totalPrice / 100);
     localStorage.setItem('totalPrice', totalPrice);
     return (
-      <div>Valor total da compra: {totalPrice}</div>
+      <div>
+        Valor total da compra:
+        {totalPrice}
+      </div>
     );
   }
 
   render() {
-    const { productsArr } = this.state
+    const { productsArr } = this.state;
     localStorage.setItem('products', JSON.stringify(productsArr));
     const { isEmpty } = this.state;
     if (isEmpty) {
@@ -134,8 +134,9 @@ class ShoppingCart extends React.Component {
         <div className="div_content">
           <Link to="/">Voltar</Link>
           <div className="div_container">
-            {productsArr.map(({ title, thumbnail, price, id, quantity }) =>
-              this.createProductInfos(title, thumbnail, price, id, quantity))}
+            {productsArr.map(({
+              title, thumbnail, price, id, quantity,
+            }) => this.createProductInfos(title, thumbnail, price, id, quantity))}
           </div>
           <div className="div_container">
             {this.totalPrice()}
