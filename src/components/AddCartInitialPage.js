@@ -15,16 +15,15 @@ class AddCartInitialPage extends Component {
   addItemToCart() {
     const { product } = this.props;
     if (!localStorage.products) {
-      return localStorage.setItem("products", JSON.stringify([product]));
+      return localStorage.setItem('products', JSON.stringify([product]));
     }
-    const products = JSON.parse(localStorage.getItem("products"));
+    const products = JSON.parse(localStorage.getItem('products'));
     if (localStorage.products.includes(product.id)) {
-      const index = products.findIndex(item => item.id === product.id);
-      console.log(index)
+      const index = products.findIndex((item) => item.id === product.id);
       products[index].quantity += 1;
-      return localStorage.setItem("products", JSON.stringify(products));
+      return localStorage.setItem('products', JSON.stringify(products));
     }
-    localStorage.setItem("products", JSON.stringify([...products, product]));
+    return localStorage.setItem('products', JSON.stringify([...products, product]));
   }
 
   render() {

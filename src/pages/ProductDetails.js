@@ -24,13 +24,13 @@ class ProductDetails extends Component {
           ({ attributes: [...state.attributes, `${element.name}: ${element.value_name}`] }))));
   }
 
-  incrementCount() {
+  // incrementCount() {
 
-  }
+  // }
 
-  decreaseCount() {
-    
-  }
+  // decreaseCount() {
+
+  // }
 
   render() {
     const { product } = this.props.location.state;
@@ -51,7 +51,7 @@ class ProductDetails extends Component {
         <div>
           <p>Quantidade</p>
           <button onClick={this.decreaseCount}>-</button>
-          <p></p>
+          {/* <p></p> */}
           <button onClick={this.incrementCount}>+</button>
           <button>Adicionar ao carrinho</button>
         </div>
