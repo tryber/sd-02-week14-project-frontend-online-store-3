@@ -63,7 +63,7 @@ class Checkout extends Component {
     return (
       <div className="checkout-page">
         <div>
-          <button type="button" onClick={this.handleRedirect}> </button>
+          <button type="button" onClick={this.handleRedirect}>VOLTAR</button>
         </div>
         <ReviewCart cart={cart} totalPrice={totalPrice} />
         <ClientInfo addClientInfo={(event) => this.addClientInfo(event)} />
@@ -72,7 +72,7 @@ class Checkout extends Component {
           paymentMethod={paymentMethod}
         />
         <div className="submit-button">
-          <button onClick={this.handleSubmit}>Comprar</button>
+          <button type="button" onClick={this.handleSubmit}>Comprar</button>
         </div>
       </div>
     );
