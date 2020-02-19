@@ -11,13 +11,13 @@ class PaymentMethod extends Component {
   }
 
   createOption(option) {
-    const { paymentMethod, getPayment } = this.props;
+    const { paymentMethod, addPaymentMethod } = this.props;
     return (
       <div className="radio">
         <label>
           <input type="radio" value={option}
             checked={paymentMethod === option}
-            onChange={e => getPayment(e.target.value)} />
+            onChange={e => addPaymentMethod(e.target.value)} />
           {option} <img src={card} />
         </label>
       </div>
@@ -25,14 +25,14 @@ class PaymentMethod extends Component {
   }
 
   renderPaymentMethod() {
-    const { paymentMethod, getPayment } = this.props;
+    const { paymentMethod, addPaymentMethod } = this.props;
     return (
       <form>
         <div className="radio">
           <label>
             <input type="radio" value="boleto"
               checked={paymentMethod === 'boleto'}
-              onChange={e => getPayment(e.target.value)} />
+              onChange={e => addPaymentMethod(e.target.value)} />
             Boleto <img src={barCode} />
           </label>
         </div>
