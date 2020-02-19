@@ -6,7 +6,6 @@ import ClientInfo from '../components/ClientInfo';
 import ReviewCart from '../components/ReviewCart';
 import returnButton from '../imgs/return.svg';
 import './Checkout.css';
-import * as data from '../services/data'
 
 class Checkout extends Component {
   constructor(props) {
@@ -15,8 +14,8 @@ class Checkout extends Component {
       clientInfo: {},
       paymentMethod: '',
       isShouldRedirect: false,
-      cart: [{ title: 'lucas', thumbnail: 'zé', quantity: 2, price: 2, id: 's' }, { title: 'lucas', thumbnail: 'zé', quantity: 2, price: 2, id: 's' }],
-      totalPrice: 222,
+      cart: JSON.parse(localStorage.getItem('products')),
+      totalPrice: localStorage.getItem('totalPrice'),
     }
 
     this.addClientInfo = this.addClientInfo.bind(this);
