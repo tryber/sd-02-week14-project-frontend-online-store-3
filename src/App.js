@@ -1,20 +1,19 @@
 import React from 'react';
-// import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import SearchBar from './pages/SearchBar';
 import './App.css';
-// import ProductDetails from './pages/ProductDetails';
+import ProductDetails from './pages/ProductDetails';
 // import ProductList from './components/ProductList';
 
 function App() {
   return (
     <div>
-      {/* <BrowserRouter>
+      <BrowserRouter>
         <Switch>
-          <Route to="/" component={SearchBar} />
-          <ProductDetails to= />
+          <Route exact path="/" component={SearchBar} />
+          <Route path="/products/:id" component={ProductDetails} />
         </Switch>
-      </BrowserRouter> */}
-      <SearchBar />
+      </BrowserRouter>
     </div>
   );
 }

@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './ProductItem.css';
 import ButtonAddCart from './AddCartInitialPage';
 
 class ProductItem extends Component {
   render() {
-    const { title, thumbnail, price } = this.props;
+    const { title, thumbnail, price, id } = this.props;
     return (
       <div className="product-item">
         <div>
@@ -18,7 +19,12 @@ class ProductItem extends Component {
           {price}
         </div>
         <div>
-          {/* <Link to={`/products/${id}`}>Ver detalhes</Link> */}
+          <Link to={{
+            pathname: `/products/${id}`,
+            state: {
+              product: this.props
+            }
+          }}>Ver detalhes</Link>
         </div>
         <div>
           <ButtonAddCart product={this.props} />
