@@ -16,7 +16,7 @@ class Checkout extends Component {
       isShouldRedirect: false,
       cart: JSON.parse(localStorage.getItem('products')),
       totalPrice: localStorage.getItem('totalPrice'),
-    }
+    };
 
     this.addClientInfo = this.addClientInfo.bind(this);
     this.addPaymentMethod = this.addPaymentMethod.bind(this);
@@ -29,15 +29,14 @@ class Checkout extends Component {
     this.setState({
       clientInfo: {
         ...this.state.clientInfo,
-        [name]: value
-      }
-    }
-    );
+        [name]: value,
+      },
+    });
   }
 
   addPaymentMethod(paymentMethod) {
-    console.log(paymentMethod)
-    this.setState((state) => ({ paymentMethod }))
+    console.log(paymentMethod);
+    this.setState(() => ({ paymentMethod }));
   }
 
   handleRedirect() {
@@ -48,17 +47,19 @@ class Checkout extends Component {
 
   handleSubmit(event) {
     const {
-      clientInfo, paymentMethod, cart, totalPrice } = this.state;
-    localStorage.setItem('checkout', JSON.stringify([clientInfo, paymentMethod, cart, totalPrice]))
-    alert('Parabéns, você contraiu uma dívida de: ' + this.state.totalPrice);
+      clientInfo, paymentMethod, cart, totalPrice,
+    } = this.state;
+    localStorage.setItem('checkout', JSON.stringify([clientInfo, paymentMethod, cart, totalPrice]));
+    alert(`Parabéns, você contraiu uma dívida de: ${this.state.totalPrice}`);
     event.preventDefault();
     this.handleRedirect();
   }
 
   render() {
-    const { isShouldRedirect, paymentMethod, cart, totalPrice } = this.state;
-    if (isShouldRedirect)
-      return <Redirect to="/" />;
+    const {
+      isShouldRedirect, paymentMethod, cart, totalPrice,
+    } = this.state;
+    if (isShouldRedirect) return <Redirect to="/" />;
     return (
       <div className="checkout-page">
         <div>
@@ -66,14 +67,16 @@ class Checkout extends Component {
         </div>
         <ReviewCart cart={cart} totalPrice={totalPrice} />
         <ClientInfo addClientInfo={(event) => this.addClientInfo(event)} />
-        <PaymentMethod addPaymentMethod={this.addPaymentMethod}
-          paymentMethod={paymentMethod} />
-        <div className='submit-button'>
+        <PaymentMethod
+          addPaymentMethod={this.addPaymentMethod}
+          paymentMethod={paymentMethod}
+        />
+        <div className="submit-button">
           <button onClick={this.handleSubmit}>Comprar</button>
         </div>
       </div>
-    )
+    );
   }
 }
 
-export default Checkout
+export default Checkout;
