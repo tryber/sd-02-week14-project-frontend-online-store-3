@@ -30,6 +30,6 @@ class AddCartInitialPage extends Component {
 
 AddCartInitialPage.propTypes = {
   product: PropTypes.string.isRequired,
-}
+};
 
 export default AddCartInitialPage;

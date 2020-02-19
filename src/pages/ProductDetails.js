@@ -16,7 +16,7 @@ class ProductDetails extends Component {
     const { productInfo } = product;
     productAPI.getQueryNCategory(productInfo.categoryId, productInfo.query)
       .then((products) => products.results.find((item) => item.id === product.id))
-      .then((response) => response.attributes.map((element) => this.setState(state => ({ attributes: [...state.attributes, `${element.name}: ${element.value_name}`] }))));
+      .then((response) => response.attributes.map((element) => this.setState((state) => ({ attributes: [...state.attributes, `${element.name}: ${element.value_name}`] }))));
   }
 
   render() {
@@ -40,8 +40,8 @@ ProductDetails.propTypes = {
   location: PropTypes.shape({
     state: PropTypes.shape({
       product: PropTypes.object,
-    })
+    }),
   }).isRequired,
-}
+};
 
 export default ProductDetails;

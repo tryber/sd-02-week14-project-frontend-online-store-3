@@ -25,9 +25,8 @@ class ProductItem extends Component {
               state: {
                 product: this.props,
               },
-            }}>
-            Ver detalhes
-          </Link>
+            }}
+          >Ver detalhes</Link>
         </div>
         <div>
           <AddCartInitialPage product={this.props} />
