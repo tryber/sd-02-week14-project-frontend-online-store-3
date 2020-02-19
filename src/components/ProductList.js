@@ -37,6 +37,11 @@ class ProductList extends Component {
               currency: 'BRL',
               minimumFractionDigits: 2,
             }).format(product.price)}
+            id={product.id}
+            realPrice={product.price}
+            quantity={1}
+            productInfo={this.props}
+            key={product.id}
           />,
         )}
       </div>
