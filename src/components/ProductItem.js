@@ -10,9 +10,6 @@ class ProductItem extends Component {
     return (
       <div className="product-item">
         <div>
-          {title}
-        </div>
-        <div>
           <Link
             to={{
               pathname: `/products/${id}`,
@@ -21,8 +18,11 @@ class ProductItem extends Component {
               },
             }}
           >
-            <img src={thumbnail} alt={`imagem de um ${title}`} />
+            {title}
           </Link>
+        </div>
+        <div>
+          <img src={thumbnail} alt={`imagem de um ${title}`} />
         </div>
         <div>
           {price}
