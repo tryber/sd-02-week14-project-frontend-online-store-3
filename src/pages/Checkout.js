@@ -14,12 +14,14 @@ class Checkout extends Component {
       paymentMethod: false,
       isShouldRedirect: false,
       errors: {},
+      toBlur: '',
     };
     this.addClientInfo = this.addClientInfo.bind(this);
     this.addPaymentMethod = this.addPaymentMethod.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleRedirect = this.handleRedirect.bind(this);
     this.validateForm = this.validateForm.bind(this);
+    this.blurForms = this.blurForms.bind(this);
   }
 
   addClientInfo(Info) {
@@ -33,14 +35,24 @@ class Checkout extends Component {
           : '';
         break;
       case 'CPF':
-        errors.CPF = validCPFRegex.test(value)
+        errors.CPF = value.length < 5
           ? 'Insira um CPF válido'
           : '';
         break;
       case 'Email':
         errors.Email = validEmailRegex.test(value)
           ? ''
-          : 'Email is not valid!';
+          : 'Email inválido';
+        break;
+      case 'Telefone':
+        errors.Telefone = value.length < 5
+          ? ''
+          : 'Telefone não existe';
+        break;
+      case 'CEP':
+        errors.CEP = value.length < 5
+          ? ''
+          : 'CEP inexistente';
         break;
       default:
         break;
@@ -52,6 +64,7 @@ class Checkout extends Component {
       },
       errors,
       [name]: value,
+      toBlur: '',
     });
   }
 
@@ -76,7 +89,7 @@ class Checkout extends Component {
   handleSubmit(event) {
     event.preventDefault();
     if (this.validateForm()) {
-      const { clientInfo, paymentMethod } = this.state
+      const { clientInfo, paymentMethod } = this.state;
       console.info('Valid Form');
       localStorage.clear();
       localStorage.setItem('checkout', JSON.stringify([clientInfo, paymentMethod]));
@@ -84,13 +97,19 @@ class Checkout extends Component {
       this.handleRedirect();
     } else {
       console.error('Invalid Form');
+      this.blurForms();
     }
   }
 
+  blurForms() {
+    const { errors } = this.state;
+    const toBlur = Object.values(errors).filter((value) => value !== '').name;
+    console.log(toBlur);
+  }
 
   render() {
     const {
-      isShouldRedirect, paymentMethod,
+      isShouldRedirect, paymentMethod, toBlur
     } = this.state;
     if (isShouldRedirect) return <Redirect to="/" />;
     return (
@@ -99,7 +118,7 @@ class Checkout extends Component {
           <button type="button" onClick={this.handleRedirect}>VOLTAR</button>
         </div>
         <ReviewCart />
-        <ClientInfo addClientInfo={(event) => this.addClientInfo(event)} />
+        <ClientInfo addClientInfo={(event) => this.addClientInfo(event)} toBlur={toBlur}/>
         <PaymentMethod
           addPaymentMethod={this.addPaymentMethod}
           paymentMethod={paymentMethod}

@@ -10,12 +10,15 @@ class ClientInfo extends Component {
   }
 
   createOption(type, name, placeholder) {
-    const { addClientInfo } = this.props;
+    const { addClientInfo, toBlur } = this.props;
+    // let blur = '';
+    // if (toBlur === name) blur="red";
     return (
       <input
         type={type}
         name={name}
         placeholder={placeholder}
+        className={toBlur}
         onChange={addClientInfo}
       />
     );
@@ -63,6 +66,7 @@ class ClientInfo extends Component {
 
 ClientInfo.propTypes = {
   addClientInfo: PropTypes.func.isRequired,
+  toBlur: PropTypes.string.isRequired,
 };
 
 export default ClientInfo;
