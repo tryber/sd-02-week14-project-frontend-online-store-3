@@ -109,7 +109,7 @@ class Checkout extends Component {
 
   render() {
     const {
-      isShouldRedirect, paymentMethod, toBlur
+      isShouldRedirect, paymentMethod, toBlur,
     } = this.state;
     if (isShouldRedirect) return <Redirect to="/" />;
     return (
@@ -118,7 +118,7 @@ class Checkout extends Component {
           <button type="button" onClick={this.handleRedirect}>VOLTAR</button>
         </div>
         <ReviewCart />
-        <ClientInfo addClientInfo={(event) => this.addClientInfo(event)} toBlur={toBlur}/>
+        <ClientInfo addClientInfo={(event) => this.addClientInfo(event)} toBlur={toBlur} />
         <PaymentMethod
           addPaymentMethod={this.addPaymentMethod}
           paymentMethod={paymentMethod}
