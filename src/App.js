@@ -1,4 +1,5 @@
 import React from 'react';
+// import Checkout from './pages/Checkout';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import SearchBar from './pages/SearchBar';
 import ShoppingCart from './pages/ShoppingCart';
