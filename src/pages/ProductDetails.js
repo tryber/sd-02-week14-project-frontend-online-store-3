@@ -6,9 +6,12 @@ class ProductDetails extends Component {
   constructor(props) {
     super(props);
 
+    const { product } = this.props.location.state;
+    const { quantity } = product;
+
     this.state = {
       attributes: [],
-      productCount: 1,
+      productCount: quantity,
     };
 
     this.decreaseCount = this.decreaseCount.bind(this);
@@ -29,7 +32,7 @@ class ProductDetails extends Component {
   decreaseCount() {
     const { productCount } = this.state;
     if (productCount <= 1) return false;
-    this.setState({ productCount: productCount - 1 });
+    return this.setState({ productCount: productCount - 1 });
   }
 
   incrementCount() {
@@ -39,9 +42,9 @@ class ProductDetails extends Component {
 
   addCart() {
     const { product } = this.props.location.state;
-    const { productCount } = this.state;
+    let { productCount } = this.state;
     if (!localStorage.products) {
-      product.quantity += productCount - 1;
+      productCount += productCount - 1;
       localStorage.setItem('products', JSON.stringify([product]));
       return this.setState({ productCount: 1 });
     }
@@ -52,7 +55,7 @@ class ProductDetails extends Component {
       localStorage.setItem('products', JSON.stringify(products));
       return this.setState({ productCount: 1 });
     }
-    product.quantity += productCount - 1;
+    productCount += productCount - 1;
     localStorage.setItem('products', JSON.stringify([...products, product]));
     return this.setState({ productCount: 1 });
   }
