@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import ProductList from '../components/ProductList';
 import * as productAPI from '../services/productAPI';
-// import lupa from '../imgs/search.svg';
 import './SearchBar.css';
 
 
@@ -54,9 +53,7 @@ class SearchBar extends Component {
   createInputSearch() {
     return (
       <div className="header">
-        {/* <div>
-        <img src={lupa} alt="lupa" className="lupa" onClick={this.onSearchTextChange} />
-        </div> */}
+        <button type="button" className="search-button" onClick={this.onSearchTextChange}>        </button>
         <label htmlFor="text">
           <input
             id="text"

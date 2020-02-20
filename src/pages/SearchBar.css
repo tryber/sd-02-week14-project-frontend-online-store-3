@@ -25,3 +25,10 @@
   text-align: center;
   width: 18px;
 }
+
+.search-button {
+  background-image: url('../imgs/search.svg');  
+  color: white;
+  height: 30px;
+  width: 30px;
+}

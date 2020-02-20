@@ -3,7 +3,6 @@ import { Redirect } from 'react-router-dom';
 import PaymentMethod from '../components/PaymentMethod';
 import ClientInfo from '../components/ClientInfo';
 import ReviewCart from '../components/ReviewCart';
-// import returnButton from '../imgs/return.svg';
 import './Checkout.css';
 
 class Checkout extends Component {
@@ -11,12 +10,9 @@ class Checkout extends Component {
     super(props);
     this.state = {
       clientInfo: {},
-      paymentMethod: '',
+      paymentMethod: false,
       isShouldRedirect: false,
-      cart: JSON.parse(localStorage.getItem('products')),
-      totalPrice: localStorage.getItem('totalPrice'),
     };
-
     this.addClientInfo = this.addClientInfo.bind(this);
     this.addPaymentMethod = this.addPaymentMethod.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -46,11 +42,13 @@ class Checkout extends Component {
   }
 
   handleSubmit(event) {
+    //validação
     const {
       clientInfo, paymentMethod, cart, totalPrice,
     } = this.state;
-    localStorage.setItem('checkout', JSON.stringify([clientInfo, paymentMethod, cart, totalPrice]));
-    alert(`Parabéns, você contraiu uma dívida de: ${this.state.totalPrice}`);
+    // localStorage.clear();
+    localStorage.setItem('checkout', JSON.stringify([clientInfo, paymentMethod, totalPrice]));
+    alert(`Parabéns, você contraiu uma dívida de: ${totalPrice}`);
     event.preventDefault();
     this.handleRedirect();
   }
