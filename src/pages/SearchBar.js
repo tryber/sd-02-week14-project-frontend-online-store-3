@@ -87,7 +87,7 @@ class SearchBar extends Component {
 
   render() {
     const { query, isShouldRedirect, categorySelected } = this.state;
-    if (isShouldRedirect) return <Redirect to="/banana" />;
+    if (isShouldRedirect) return <Redirect to="/shopping_cart" />;
     return (
       <div className="main-page">
         {this.createInputSearch()}

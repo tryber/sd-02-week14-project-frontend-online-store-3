@@ -5,23 +5,6 @@ import './ShoppingCart.css';
 class ShoppingCart extends React.Component {
   constructor(props) {
     super(props);
-    const products = [
-      {
-        id: 1,
-        title: 'Mouse',
-        thumbnail: 'Imagem',
-        price: 'R$ 500,50',
-        quantity: 2,
-      },
-      {
-        id: 2,
-        title: 'Teclado',
-        thumbnail: 'Imagem',
-        price: 'R$ 32,00',
-        quantity: 1,
-      },
-    ];
-    localStorage.setItem('products', JSON.stringify(products));
     const teste = JSON.parse(localStorage.getItem('products'));
     this.state = {
       isEmpty: true,
