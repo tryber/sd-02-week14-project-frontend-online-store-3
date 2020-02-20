@@ -1,7 +1,15 @@
+.div_content {
+  margin-left: 20px;
+}
+
+.div_container {
+  margin-top: 100px;
+}
+
 .flex_cart_container {
   display: flex;
   justify-content: space-between;
-  width: 30%;
+  width: 500px;
 }
 
 .flex_qtd_container {

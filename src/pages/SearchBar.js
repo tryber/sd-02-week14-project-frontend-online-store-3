@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import ProductList from '../components/ProductList';
 import * as productAPI from '../services/productAPI';
+// import lupa from '../imgs/search.svg';
+import './SearchBar.css';
+
 
 class SearchBar extends Component {
   constructor(props) {
@@ -9,11 +13,14 @@ class SearchBar extends Component {
       query: '',
       categorySelected: '',
       categories: [],
+      searchTerm: '',
+      isShouldRedirect: false,
     };
     this.createInputSearch = this.createInputSearch.bind(this);
     this.createCategories = this.createCategories.bind(this);
     this.onSearchTextChange = this.onSearchTextChange.bind(this);
     this.onSelectedCategoryChange = this.onSelectedCategoryChange.bind(this);
+    this.onChangeRedirect = this.onChangeRedirect.bind(this);
   }
 
   componentDidMount() {
@@ -21,10 +28,17 @@ class SearchBar extends Component {
       .then((categories) => this.setState({ categories }));
   }
 
-  onSearchTextChange(event) {
-    if (event.keyCode === 13) {
-      const { value } = event.target;
-      this.setState({ query: value });
+  onChangeRedirect() {
+    this.setState({
+      isShouldRedirect: true,
+    });
+  }
+
+  onSearchTextChange(e) {
+    if (e.keyCode === 13 || e.type === 'click') {
+      const { searchTerm } = this.state;
+      this.setState({ query: searchTerm });
+      e.target.value = '';
     }
   }
 
@@ -39,40 +53,50 @@ class SearchBar extends Component {
 
   createInputSearch() {
     return (
-      <label htmlFor="text">
-        <input
-          id="text"
-          type="text"
-          onKeyUp={this.onSearchTextChange}
-        />
-      </label>
+      <div className="header">
+        {/* <div>
+        <img src={lupa} alt="lupa" className="lupa" onClick={this.onSearchTextChange} />
+        </div> */}
+        <label htmlFor="text">
+          <input
+            id="text"
+            type="text"
+            onChange={(e) => this.setState({ searchTerm: e.target.value })}
+            onKeyUp={this.onSearchTextChange}
+            className="input-search"
+          />
+        </label>
+        <button type="button" className="cart" onClick={this.onChangeRedirect}>
+          <p> 1 </p>
+        </button>
+      </div>
     );
   }
+
   createCategories() {
     const { categories } = this.state;
     return (
       <label htmlFor="categories">
         Categorias
         <select id="categories" onChange={this.onSelectedCategoryChange}>
-          {categories.map(({ name, id }) => (<option key={id} value={name}>{name}</option>),
-          )}
+          {categories.map(({ name, id }) => (<option key={id} value={name}>{name}</option>))}
         </select>
       </label>
     );
   }
 
   render() {
+    const { query, isShouldRedirect, categorySelected } = this.state;
+    if (isShouldRedirect) return <Redirect to="/banana" />;
     return (
-      <div>
-        <div className="search-bar">
-          {this.createInputSearch()}
-        </div>
-        <div>
+      <div className="main-page">
+        {this.createInputSearch()}
+        <div className="main-content">
           <div className="categories">
             {this.createCategories()}
           </div>
           <div className="productList">
-            <ProductList categoryId={this.state.categorySelected} query={this.state.query} />
+            <ProductList categoryId={categorySelected} query={query} />
           </div>
         </div>
       </div>
