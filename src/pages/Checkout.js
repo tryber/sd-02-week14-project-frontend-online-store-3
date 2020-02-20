@@ -1,9 +1,9 @@
+
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import PaymentMethod from '../components/PaymentMethod';
 import ClientInfo from '../components/ClientInfo';
 import ReviewCart from '../components/ReviewCart';
-// import returnButton from '../imgs/return.svg';
 import './Checkout.css';
 
 class Checkout extends Component {
@@ -11,28 +11,50 @@ class Checkout extends Component {
     super(props);
     this.state = {
       clientInfo: {},
-      paymentMethod: '',
+      paymentMethod: false,
       isShouldRedirect: false,
-      cart: JSON.parse(localStorage.getItem('products')),
-      totalPrice: localStorage.getItem('totalPrice'),
+      errors: {},
     };
-
     this.addClientInfo = this.addClientInfo.bind(this);
     this.addPaymentMethod = this.addPaymentMethod.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleRedirect = this.handleRedirect.bind(this);
+    this.validateForm = this.validateForm.bind(this);
   }
 
   addClientInfo(Info) {
     const { name, value } = Info.target;
-    const { clientInfo } = this.state;
+    const { clientInfo, errors } = this.state;
+    const validEmailRegex = RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
+    switch (name) {
+      case 'nome':
+        errors.nome = value.length < 5
+          ? 'O nome completo deve possuir mais de 5 letras'
+          : '';
+        break;
+      case 'CPF':
+        errors.CPF = validCPFRegex.test(value)
+          ? 'Insira um CPF válido'
+          : '';
+        break;
+      case 'Email':
+        errors.Email = validEmailRegex.test(value)
+          ? ''
+          : 'Email is not valid!';
+        break;
+      default:
+        break;
+    }
     this.setState({
       clientInfo: {
         ...clientInfo,
         [name]: value,
       },
+      errors,
+      [name]: value,
     });
   }
+
 
   addPaymentMethod(paymentMethod) {
     console.log(paymentMethod);
@@ -45,19 +67,30 @@ class Checkout extends Component {
     });
   }
 
-  handleSubmit(event) {
-    const {
-      clientInfo, paymentMethod, cart, totalPrice,
-    } = this.state;
-    localStorage.setItem('checkout', JSON.stringify([clientInfo, paymentMethod, cart, totalPrice]));
-    alert(`Parabéns, você contraiu uma dívida de: ${this.state.totalPrice}`);
-    event.preventDefault();
-    this.handleRedirect();
+  validateForm() {
+    const { paymentMethod, errors } = this.state;
+    const valid = Object.values(errors).every((value) => value === '');
+    return (valid && paymentMethod);
   }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    if (this.validateForm()) {
+      const { clientInfo, paymentMethod } = this.state
+      console.info('Valid Form');
+      localStorage.clear();
+      localStorage.setItem('checkout', JSON.stringify([clientInfo, paymentMethod]));
+      alert(`${clientInfo.nome}, vem pra Trybe!`);
+      this.handleRedirect();
+    } else {
+      console.error('Invalid Form');
+    }
+  }
+
 
   render() {
     const {
-      isShouldRedirect, paymentMethod, cart, totalPrice,
+      isShouldRedirect, paymentMethod,
     } = this.state;
     if (isShouldRedirect) return <Redirect to="/" />;
     return (
@@ -65,7 +98,7 @@ class Checkout extends Component {
         <div>
           <button type="button" onClick={this.handleRedirect}>VOLTAR</button>
         </div>
-        <ReviewCart cart={cart} totalPrice={totalPrice} />
+        <ReviewCart />
         <ClientInfo addClientInfo={(event) => this.addClientInfo(event)} />
         <PaymentMethod
           addPaymentMethod={this.addPaymentMethod}
