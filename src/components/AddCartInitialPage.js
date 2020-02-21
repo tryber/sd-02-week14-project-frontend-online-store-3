@@ -4,32 +4,34 @@ import PropTypes from 'prop-types';
 class AddCartInitialPage extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      products: [],
-    };
-
     this.addItemToCart = this.addItemToCart.bind(this);
   }
 
   addItemToCart() {
     const { product } = this.props;
-    if (!localStorage.products) {
-      return localStorage.setItem('products', JSON.stringify([product]));
+    const totalItems = parseInt(localStorage.getItem('totalItems'), 10) || 0;
+    if (!localStorage.products || localStorage.getItem('products') === 'null') {
+      localStorage.setItem('totalItems', totalItems + 1);
+      localStorage.setItem('products', JSON.stringify([product]));
+      return product.totalItems();
     }
     const products = JSON.parse(localStorage.getItem('products'));
     if (localStorage.products.includes(product.id)) {
       const index = products.findIndex((item) => item.id === product.id);
       products[index].quantity += 1;
-      return localStorage.setItem('products', JSON.stringify(products));
+      localStorage.setItem('totalItems', totalItems + 1);
+      localStorage.setItem('products', JSON.stringify(products));
+      return product.totalItems();
     }
-    return localStorage.setItem('products', JSON.stringify([...products, product]));
+    localStorage.setItem('totalItems', totalItems + 1);
+    localStorage.setItem('products', JSON.stringify([...products, product]));
+    return product.totalItems();
   }
 
   render() {
     return (
       <div>
-        <button onClick={this.addItemToCart}>Adicionar ao carrinho</button>
+        <button type="button" onClick={this.addItemToCart}>Adicionar ao carrinho</button>
       </div>
     );
   }
