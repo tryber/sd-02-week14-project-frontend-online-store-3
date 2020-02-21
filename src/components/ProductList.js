@@ -41,7 +41,7 @@ class ProductList extends Component {
             id={product.id}
             realPrice={product.price}
             quantity={1}
-            productInfo={{categoryId, query}}
+            productInfo={{ categoryId, query }}
             key={product.id}
           />,
         )}
