@@ -83,9 +83,7 @@ class CustomerRating extends Component {
     return (
       <section>
         <form>
-          <div className="title">
-            <h3>Avaliações</h3>
-          </div>
+          <div className="title"><h3>Avaliações</h3></div>
           <div>
             <label htmlFor="email">
               <input id="email" type="email" placeholder="Email" onChange={this.addEmail} />
@@ -106,9 +104,7 @@ class CustomerRating extends Component {
             <button type="button" onClick={this.saveRating}>Avaliar</button>
           </div>
         </form>
-        <section>
-          {this.renderRatings()}
-        </section>
+        <section>{this.renderRatings()}</section>
       </section>
     );
   }

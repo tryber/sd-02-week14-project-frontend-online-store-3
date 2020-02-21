@@ -30,7 +30,6 @@ class ProductDetails extends Component {
       .then((response) => response.attributes.map((element) => this.setState((state) => ({
         attributes: [...state.attributes, `${element.name}: ${element.value_name}`],
       }))));
-
   }
 
   decreaseCount() {
@@ -68,35 +67,48 @@ class ProductDetails extends Component {
     return this.setState({ productCount: 1 });
   }
 
-  render() {
-    const { product } = this.props.location.state;
-    const { title, thumbnail, price } = product;
-    const { attributes, productCount } = this.state;
+  renderProductCount() {
+    const { productCount } = this.state;
     return (
       <div>
         <section className="title">
-          <h3>{title}  -  {price}</h3>
+          <h3>Quantidade</h3>
+        </section>
+        <section className="product_count">
+          <button type="button" onClick={this.decreaseCount} className="product_counter">
+            -
+          </button>
+          <div className="count_number">
+            <p>{productCount}</p>
+          </div>
+          <button type="button" onClick={this.incrementCount} className="product_counter">
+            +
+          </button>
+          <button type="button" onClick={this.addCart} className="add_cart">
+            Adicionar ao carrinho
+          </button>
+        </section>
+      </div>
+    );
+  }
+
+  render() {
+    const { product } = this.props.location.state;
+    const { title, thumbnail, price } = product;
+    const { attributes } = this.state;
+    return (
+      <div>
+        <section className="title">
+          <h3>{`${title}  -  ${price}`}</h3>
         </section>
         <section className="product_info">
           <img src={thumbnail} alt={`imagem de um ${title}`} className="product_image" />
           <ul className="product_attributes">
             <h4 style={{ marginTop: 0 }}>Especificações técnicas</h4>
-            {attributes.map((attribute) => <li className="product_attribute" key={attribute}>{attribute}</li>)}
+            {attributes.map((attribute) => <li className="attribute" key={attribute}>{attribute}</li>)}
           </ul>
         </section>
-        <div>
-          <section className="title">
-            <h3>Quantidade</h3>
-          </section>
-          <section className="product_count">
-            <button type="button" onClick={this.decreaseCount} className="product_counter">-</button>
-            <div className="count_number">
-              <p>{productCount}</p>
-            </div>
-            <button type="button" onClick={this.incrementCount} className="product_counter">+</button>
-            <button type="button" onClick={this.addCart} className="add_cart">Adicionar ao carrinho</button>
-          </section>
-        </div>
+        {this.renderProductCount()}
         <div>
           <CustomerRating />
         </div>
