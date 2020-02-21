@@ -48,29 +48,41 @@ class Checkout extends Component {
     const { toBlur } = this.state;
     switch (name) {
       case 'CPF':
-        if (value.length < 11) {
-          this.setState({ toBlur: [...toBlur, name] });
-        } else {
-          const clean = toBlur.filter((el) => el !== name);
-          this.setState({ toBlur: [...clean] });
-        }
+        this.validateCPF(name, value, toBlur);
         break;
       case 'Email':
-        if (value.length < 11) {
-          this.setState({ toBlur: [...toBlur, name] });
-        } else {
-          const clean = toBlur.filter((el) => el !== name);
-          this.setState({ toBlur: [...clean] });
-        }
+        this.validateEmail(name, value, toBlur);
         break;
       default:
-        if (value === '') {
-          this.setState({ toBlur: [...toBlur, name] });
-        } else {
-          const clean = toBlur.filter((el) => el !== name);
-          this.setState({ toBlur: [...clean] });
-        }
+        this.validateDefault(name, value, toBlur);
         break;
+    }
+  }
+
+  validateCPF(name, value, toBlur) {
+    if (value.length < 11) {
+      this.setState({ toBlur: [...toBlur, name] });
+    } else {
+      const clean = toBlur.filter((el) => el !== name);
+      this.setState({ toBlur: [...clean] });
+    }
+  }
+
+  validateEmail(name, value, toBlur) {
+    if (value.length < 11) {
+      this.setState({ toBlur: [...toBlur, name] });
+    } else {
+      const clean = toBlur.filter((el) => el !== name);
+      this.setState({ toBlur: [...clean] });
+    }
+  }
+
+  validateDefault(name, value, toBlur) {
+    if (value === '') {
+      this.setState({ toBlur: [...toBlur, name] });
+    } else {
+      const clean = toBlur.filter((el) => el !== name);
+      this.setState({ toBlur: [...clean] });
     }
   }
 
