@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import CustomerRating from '../components/CustomerRating';
+import './ProductDetails.css';
 import * as productAPI from '../services/productAPI';
 
 class ProductDetails extends Component {
@@ -43,12 +45,11 @@ class ProductDetails extends Component {
 
   addCart() {
     const { product } = this.props.location.state;
-    let { productCount } = this.state;
+    const { productCount } = this.state;
     const { totalItems } = this.state;
     if (!localStorage.products) {
       localStorage.setItem('totalItems', (totalItems + productCount));
       product.quantity += productCount - 1;
-      productCount += 1;
       localStorage.setItem('products', JSON.stringify([product]));
       return this.setState({ productCount: 1 });
     }
@@ -61,34 +62,57 @@ class ProductDetails extends Component {
       return this.setState({ productCount: 1 });
     }
     localStorage.setItem('totalItems', (totalItems + productCount));
-    console.log(product);
     product.quantity += productCount - 1;
     localStorage.setItem('products', JSON.stringify([...products, product]));
     return this.setState({ productCount: 1 });
   }
 
+  renderProductCount() {
+    const { productCount } = this.state;
+    return (
+      <div>
+        <section className="title">
+          <h3>Quantidade</h3>
+        </section>
+        <section className="product_count">
+          <button type="button" onClick={this.decreaseCount} className="product_counter">
+            -
+          </button>
+          <div className="count_number">
+            <p>{productCount}</p>
+          </div>
+          <button type="button" onClick={this.incrementCount} className="product_counter">
+            +
+          </button>
+          <button type="button" onClick={this.addCart} className="add_cart">
+            Adicionar ao carrinho
+          </button>
+        </section>
+      </div>
+    );
+  }
+
   render() {
     const { product } = this.props.location.state;
     const { title, thumbnail, price } = product;
-    const { attributes, productCount } = this.state;
+    const { attributes } = this.state;
     return (
       <div>
-        <div>
-          <div>{title}</div>
-          <div>{price}</div>
-          <img src={thumbnail} alt={`imagem de um ${title}`} />
-        </div>
-        <div>
-          <ul>
-            {attributes.map((attribute) => <li key={attribute}>{attribute}</li>)}
+        <section className="title">
+          <h3>{`${title}  -  ${price}`}</h3>
+        </section>
+        <section className="product_info">
+          <img src={thumbnail} alt={`imagem de um ${title}`} className="product_image" />
+          <ul className="product_attributes">
+            <h4 style={{ marginTop: 0 }}>Especificações técnicas</h4>
+            {attributes.map((attribute) =>
+              <li className="attribute" key={attribute}>{attribute}</li>)
+            }
           </ul>
-        </div>
+        </section>
+        {this.renderProductCount()}
         <div>
-          <p>Quantidade</p>
-          <button type="button" onClick={this.decreaseCount}>-</button>
-          <p>{productCount}</p>
-          <button type="button" onClick={this.incrementCount}>+</button>
-          <button type="button" onClick={this.addCart}>Adicionar ao carrinho</button>
+          <CustomerRating />
         </div>
       </div>
     );
