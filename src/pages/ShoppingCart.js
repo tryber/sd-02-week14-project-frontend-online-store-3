@@ -7,7 +7,6 @@ class ShoppingCart extends React.Component {
     super(props);
     const teste = JSON.parse(localStorage.getItem('products'));
     this.state = {
-      isEmpty: true,
       productsArr: teste,
     };
     this.removeFromCart = this.removeFromCart.bind(this);
@@ -24,12 +23,12 @@ class ShoppingCart extends React.Component {
   }
 
   createQtdButton(quantity, id) {
-    this.x = 'Diminuir';
+    this.x = '-';
     return (
       <div className="flex_qtd_container">
         <button type="button" onClick={() => this.changeQuantity('down', id)}>{this.x}</button>
         <input type="input" className="input_qtd" value={quantity} />
-        <button type="button" onClick={() => this.changeQuantity('up', id)}>Aumentar</button>
+        <button type="button" onClick={() => this.changeQuantity('up', id)}>+</button>
       </div>
     );
   }
@@ -37,7 +36,7 @@ class ShoppingCart extends React.Component {
   removeFromCart(event) {
     const { productsArr } = this.state;
     const { id } = event.target;
-    const items = productsArr.map((product) => product.id).indexOf(parseInt(id, 10));
+    const items = productsArr.map((product) => product.id).indexOf(id);
     productsArr.splice(items, 1);
     this.setState({ productsArr });
   }
@@ -58,10 +57,10 @@ class ShoppingCart extends React.Component {
           {this.createRemoveButton(id)}
         </div>
         <div>
-          {title}
+          <img src={thumbnail} alt={`imagem de um ${title}`} />
         </div>
-        <div>
-          {thumbnail}
+        <div className="title_content">
+          {title}
         </div>
         <div>
           {this.createQtdButton(quantity, id)}
@@ -71,6 +70,17 @@ class ShoppingCart extends React.Component {
         </div>
       </div>
     );
+  }
+
+  totalCartItems() {
+    const { productsArr } = this.state;
+    if (productsArr) {
+      const teste = productsArr.reduce((acc, cur) => {
+        const quantity = parseInt((cur.quantity), 10);
+        return acc + quantity;
+      }, 0);
+      localStorage.setItem('totalItems', teste);
+    }
   }
 
   totalPrice() {
@@ -99,9 +109,9 @@ class ShoppingCart extends React.Component {
 
   render() {
     const { productsArr } = this.state;
+    this.totalCartItems();
     localStorage.setItem('products', JSON.stringify(productsArr));
-    const { isEmpty } = this.state;
-    if (isEmpty) {
+    if (productsArr) {
       return (
         <div className="div_content">
           <Link to="/">Voltar</Link>
@@ -113,16 +123,17 @@ class ShoppingCart extends React.Component {
           <div className="div_container">
             {this.totalPrice()}
           </div>
+          <Link to="/checkout">FInalizar</Link>
         </div>
       );
     }
     return (
       <div>
-        <p>Nao Vazio</p>
+        <Link to="/">Voltar</Link>
+        <p>Vazio</p>
       </div>
     );
   }
 }
 
 export default ShoppingCart;
-

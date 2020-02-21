@@ -15,7 +15,6 @@ class ProductList extends Component {
 
   componentDidUpdate(prevProps) {
     const { categoryId, query } = this.props;
-
     if (categoryId !== prevProps.categoryId || query !== prevProps.query) {
       return productAPI.getQueryNCategory(categoryId, query)
         .then((products) => this.setState({ products: products.results }));
@@ -25,11 +24,13 @@ class ProductList extends Component {
 
   render() {
     const { products } = this.state;
+    const { categoryId, query, totalItems } = this.props;
     if (!products) return <div>Digite algum termo de pesquisa ou escolha uma categoria.</div>;
     return (
       <div className="product-list">
         {products.map((product) =>
           <ProductItem
+            totalItems={totalItems}
             title={product.title}
             thumbnail={product.thumbnail}
             price={new Intl.NumberFormat('pt-BR', {
@@ -40,7 +41,7 @@ class ProductList extends Component {
             id={product.id}
             realPrice={product.price}
             quantity={1}
-            productInfo={this.props}
+            productInfo={{categoryId, query}}
             key={product.id}
           />,
         )}
@@ -52,6 +53,7 @@ class ProductList extends Component {
 ProductList.propTypes = {
   categoryId: PropTypes.string.isRequired,
   query: PropTypes.string.isRequired,
+  totalItems: PropTypes.func.isRequired,
 };
 
 export default ProductList;

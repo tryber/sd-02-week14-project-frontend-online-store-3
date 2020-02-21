@@ -5,7 +5,6 @@ import * as productAPI from '../services/productAPI';
 // import lupa from '../imgs/search.svg';
 import './SearchBar.css';
 
-
 class SearchBar extends Component {
   constructor(props) {
     super(props);
@@ -15,6 +14,7 @@ class SearchBar extends Component {
       categories: [],
       searchTerm: '',
       isShouldRedirect: false,
+      totalItems: JSON.parse(localStorage.getItem('totalItems') || [0]),
     };
     this.createInputSearch = this.createInputSearch.bind(this);
     this.createCategories = this.createCategories.bind(this);
@@ -50,8 +50,8 @@ class SearchBar extends Component {
     });
   }
 
-
   createInputSearch() {
+    const { totalItems } = this.state;
     return (
       <div className="header">
         {/* <div>
@@ -67,7 +67,7 @@ class SearchBar extends Component {
           />
         </label>
         <button type="button" className="cart" onClick={this.onChangeRedirect}>
-          <p> 1 </p>
+          <p>{totalItems}</p>
         </button>
       </div>
     );
@@ -85,6 +85,12 @@ class SearchBar extends Component {
     );
   }
 
+  totalItems() {
+    let { totalItems } = this.state;
+    totalItems = localStorage.getItem('totalItems');
+    return this.setState({ totalItems });
+  }
+
   render() {
     const { query, isShouldRedirect, categorySelected } = this.state;
     if (isShouldRedirect) return <Redirect to="/shopping_cart" />;
@@ -96,7 +102,11 @@ class SearchBar extends Component {
             {this.createCategories()}
           </div>
           <div className="productList">
-            <ProductList categoryId={categorySelected} query={query} />
+            <ProductList
+              totalItems={() => this.totalItems()}
+              categoryId={categorySelected}
+              query={query}
+            />
           </div>
         </div>
       </div>
