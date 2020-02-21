@@ -26,45 +26,13 @@ class Checkout extends Component {
 
   addClientInfo(Info) {
     const { name, value } = Info.target;
-    const { clientInfo, errors, toBlur } = this.state;
-    const validEmailRegex = RegExp(/^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i);
-    if (value === '') this.setState({ toBlur: [...toBlur, name] });
-    switch (name) {
-      case 'CPF':
-        if (value.length < 11) {
-          errors.CPF = 'Insira um CPF válido';
-          this.setState({ toBlur: [...toBlur, name] });
-        } else {
-          errors.CPF = '';
-          this.setState({ toBlur: [] });
-        }
-        break;
-      case 'Email':
-        if (!validEmailRegex.test(value)) {
-          errors.Email = 'Insira um email válido';
-          this.setState({ toBlur: [...toBlur, name] });
-        } else {
-          errors.Email = '';
-          this.setState({ toBlur: [] });
-        }
-        break;
-      default:
-        if (value === '') {
-          // errors.name = 'Insira um email válido';
-          this.setState({ toBlur: [...toBlur, name] })
-        } else {
-          // errors.name = '';
-          this.setState({ toBlur: [] });
-        }
-        break;
-    }
-
+    const { clientInfo } = this.state;
+    this.validationForm(name, value);
     this.setState({
       clientInfo: {
         ...clientInfo,
         [name]: value,
       },
-      errors,
     });
   }
 
@@ -82,7 +50,42 @@ class Checkout extends Component {
   validateForm() {
     const { errors } = this.state;
     const valid = Object.values(errors).every((value) => value === '');
-    return valid;
+    return (valid);
+  }
+
+  validationForm(name, value) {
+    const { errors, toBlur } = this.state;
+    const validEmailRegex = RegExp(/^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i);
+    if (value === '') this.setState({ toBlur: [...toBlur, name] });
+    switch (name) {
+      case 'CPF':
+        if (value.length < 11) {
+          errors.CPF = 'Insira um CPF válido';
+          this.setState({ errors, toBlur: [...toBlur, name] });
+        } else {
+          errors.CPF = '';
+          this.setState({ errors, toBlur: [] });
+        }
+        break;
+      case 'Email':
+        if (!validEmailRegex.test(value)) {
+          errors.Email = 'Insira um email válido';
+          this.setState({ errors, toBlur: [...toBlur, name] });
+        } else {
+          errors.Email = '';
+          this.setState({ errors, toBlur: [] });
+        }
+        break;
+      default:
+        if (value === '') {
+          errors.name = 'Algum problema';
+          this.setState({ errors, toBlur: [...toBlur, name] });
+        } else {
+          errors.name = '';
+          this.setState({ errors, toBlur: [] });
+        }
+        break;
+    }
   }
 
   handleSubmit(event) {
