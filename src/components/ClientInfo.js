@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import estados from '../services/data';
+import './ClientInfo.css';
 
 class ClientInfo extends Component {
   constructor(props) {
@@ -10,13 +11,16 @@ class ClientInfo extends Component {
   }
 
   createOption(type, name, placeholder) {
-    const { addClientInfo } = this.props;
+    const { addClientInfo, toBlur } = this.props;
+    const blur = toBlur !== [] ? toBlur.find((el) => el === name) : '';
+    const color = blur ? 'red' : '';
     return (
       <input
         type={type}
         name={name}
         placeholder={placeholder}
-        onChange={addClientInfo}
+        className={color}
+        onBlur={addClientInfo}
       />
     );
   }
@@ -63,6 +67,7 @@ class ClientInfo extends Component {
 
 ClientInfo.propTypes = {
   addClientInfo: PropTypes.func.isRequired,
+  toBlur: PropTypes.string.isRequired,
 };
 
 export default ClientInfo;
