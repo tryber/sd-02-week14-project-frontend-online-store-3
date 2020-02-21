@@ -105,7 +105,9 @@ class ProductDetails extends Component {
           <img src={thumbnail} alt={`imagem de um ${title}`} className="product_image" />
           <ul className="product_attributes">
             <h4 style={{ marginTop: 0 }}>Especificações técnicas</h4>
-            {attributes.map((attribute) => <li className="attribute" key={attribute}>{attribute}</li>)}
+            {attributes.map((attribute) =>
+              <li className="attribute" key={attribute}>{attribute}</li>)
+            }
           </ul>
         </section>
         {this.renderProductCount()}

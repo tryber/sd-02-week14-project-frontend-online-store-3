@@ -13,13 +13,13 @@
 }
 
 .count_number {
-  text-align: center;
-  font-size: 1.5rem;
   border: 1px solid black;
   border-radius: 100%;
-  margin-top: 1rem;
-  width: 3rem;
+  font-size: 1.5rem;
   height: 3rem;
+  margin-top: 1rem;
+  text-align: center;
+  width: 3rem;
 }
 
 .product_info {
