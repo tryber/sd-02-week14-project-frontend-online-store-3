@@ -46,12 +46,11 @@ class ProductDetails extends Component {
 
   addCart() {
     const { product } = this.props.location.state;
-    let { productCount } = this.state;
+    const { productCount } = this.state;
     const { totalItems } = this.state;
     if (!localStorage.products) {
       localStorage.setItem('totalItems', (totalItems + productCount));
       product.quantity += productCount - 1;
-      productCount += 1;
       localStorage.setItem('products', JSON.stringify([product]));
       return this.setState({ productCount: 1 });
     }
@@ -64,7 +63,6 @@ class ProductDetails extends Component {
       return this.setState({ productCount: 1 });
     }
     localStorage.setItem('totalItems', (totalItems + productCount));
-    console.log(product);
     product.quantity += productCount - 1;
     localStorage.setItem('products', JSON.stringify([...products, product]));
     return this.setState({ productCount: 1 });

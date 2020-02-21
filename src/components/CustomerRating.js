@@ -12,6 +12,7 @@ class CustomerRating extends Component {
       rating: 1,
       email: '',
       comment: '',
+      status: false,
     };
 
     this.addEmail = this.addEmail.bind(this);
@@ -22,16 +23,8 @@ class CustomerRating extends Component {
   }
 
   componentDidMount() {
-    if (localStorage.comments) {
-      this.renderRatings();
-    }
+    this.renderRatings();
   }
-
-  // componentDidUpdate(nextState) {
-  //   if (nextState !== this.state) {
-  //     this.renderRatings();
-  //   }
-  // }
 
   addEmail(event) {
     const email = event.target;
@@ -49,20 +42,30 @@ class CustomerRating extends Component {
 
   saveRating() {
     if (!localStorage.comments) {
-      return localStorage.setItem('comments', JSON.stringify([this.state]));
+      localStorage.setItem('comments', JSON.stringify([this.state]));
+      this.setState({ status: true });
+      return this.renderRatings();
     }
     const comments = JSON.parse(localStorage.getItem('comments'));
-    return localStorage.setItem('comments', JSON.stringify([...comments, this.state]));
+    localStorage.setItem('comments', JSON.stringify([...comments, this.state]));
+    this.setState({ status: true });
+    return this.renderRatings();
   }
 
   renderRatings() {
     const comments = JSON.parse(localStorage.getItem('comments'));
     console.log(this.state);
+    if (!localStorage.comments) return false;
     return (
       comments.map((comment) => (
         <div>
           <div>
-            <Rating initialRating={comment.rating} />
+            <Rating
+              readonly
+              initialRating={comment.rating}
+              emptySymbol={<img src={grayStar} className="icon rating_star" alt="gray star" />}
+              fullSymbol={<img src={yellowStar} className="icon rating_star" alt="yellow star" />}
+            />
           </div>
           <div>
             {comment.email}
@@ -104,7 +107,7 @@ class CustomerRating extends Component {
           </div>
         </form>
         <section>
-          {this.renderRatings}
+          {this.renderRatings()}
         </section>
       </section>
     );
