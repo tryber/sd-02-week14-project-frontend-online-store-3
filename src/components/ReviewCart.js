@@ -3,6 +3,13 @@ import React from 'react';
 function ReviewCart() {
   const cart = JSON.parse(localStorage.getItem('products'));
   const totalPrice = localStorage.getItem('totalPrice');
+  if (cart === null) {
+    return (
+      <div>
+        <h1>Carrinho vazio</h1>
+      </div>
+    );
+  }
   return (
     <div className="review-cart">
       <h2>Revise seus Produtos</h2>

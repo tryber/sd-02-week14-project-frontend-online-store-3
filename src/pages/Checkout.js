@@ -90,7 +90,7 @@ class Checkout extends Component {
     event.preventDefault();
     const { clientInfo, paymentMethod, toBlur } = this.state;
     if (!paymentMethod) alert('Você precisa selecionar uma forma de pagamento.');
-    else if (toBlur === []) {
+    else if (toBlur.length === 0) {
       localStorage.clear();
       localStorage.setItem('checkout', JSON.stringify([clientInfo, paymentMethod]));
       alert(`${clientInfo.nome}, vem pra Trybe!`);
