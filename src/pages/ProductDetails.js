@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import CustomerRating from '../components/CustomerRating';
+import './ProductDetails.css';
 import * as productAPI from '../services/productAPI';
 
 class ProductDetails extends Component {
@@ -25,8 +27,7 @@ class ProductDetails extends Component {
     productAPI.getQueryNCategory(productInfo.categoryId, productInfo.query)
       .then((products) => products.results.find((item) => item.id === product.id))
       .then((response) => response.attributes.map((element) =>
-        this.setState((state) =>
-          ({ attributes: [...state.attributes, `${element.name}: ${element.value_name}`] }))));
+        this.setState((state) => ({ attributes: [...state.attributes, `${element.name}: ${element.value_name}`] }))));
   }
 
   decreaseCount() {
@@ -42,9 +43,8 @@ class ProductDetails extends Component {
 
   addCart() {
     const { product } = this.props.location.state;
-    let { productCount } = this.state;
+    const { productCount } = this.state;
     if (!localStorage.products) {
-      productCount += 1;
       localStorage.setItem('products', JSON.stringify([product]));
       return this.setState({ productCount: 1 });
     }
@@ -55,7 +55,8 @@ class ProductDetails extends Component {
       localStorage.setItem('products', JSON.stringify(products));
       return this.setState({ productCount: 1 });
     }
-    productCount += 1;
+    this.setState({ productCount });
+    console.log(productCount)
     localStorage.setItem('products', JSON.stringify([...products, product]));
     return this.setState({ productCount: 1 });
   }
@@ -66,22 +67,31 @@ class ProductDetails extends Component {
     const { attributes, productCount } = this.state;
     return (
       <div>
-        <div>
-          <div>{title}</div>
-          <div>{price}</div>
-          <img src={thumbnail} alt={`imagem de um ${title}`} />
-        </div>
-        <div>
-          <ul>
-            {attributes.map((attribute) => <li key={attribute}>{attribute}</li>)}
+        <section className="title">
+          <h3>{title}  -  {price}</h3>
+        </section>
+        <section className="product_info">
+          <img src={thumbnail} alt={`imagem de um ${title}`} className="product_image" />
+          <ul className="product_attributes">
+            <h4 style={{ marginTop: 0 }}>Especificações técnicas</h4>
+            {attributes.map((attribute) => <li className="product_attribute" key={attribute}>{attribute}</li>)}
           </ul>
+        </section>
+        <div>
+          <section className="title">
+            <h3>Quantidade</h3>
+          </section>
+          <section className="product_count">
+            <button type="button" onClick={this.decreaseCount} className="product_counter">-</button>
+            <div className="count_number">
+              <p>{productCount}</p>
+            </div>
+            <button type="button" onClick={this.incrementCount} className="product_counter">+</button>
+            <button type="button" onClick={this.addCart} className="add_cart">Adicionar ao carrinho</button>
+          </section>
         </div>
         <div>
-          <p>Quantidade</p>
-          <button onClick={this.decreaseCount}>-</button>
-          <p>{productCount}</p>
-          <button onClick={this.incrementCount}>+</button>
-          <button onClick={this.addCart}>Adicionar ao carrinho</button>
+          <CustomerRating />
         </div>
       </div>
     );
