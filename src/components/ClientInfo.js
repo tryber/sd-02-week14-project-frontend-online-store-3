@@ -12,7 +12,7 @@ class ClientInfo extends Component {
 
   createOption(type, name, placeholder) {
     const { addClientInfo, toBlur } = this.props;
-    const blur = toBlur !== '' ? toBlur.find((el) => el === name) : '';
+    const blur = toBlur !== [] ? toBlur.find((el) => el === name) : '';
     const color = blur ? 'red' : '';
     return (
       <input
@@ -20,7 +20,7 @@ class ClientInfo extends Component {
         name={name}
         placeholder={placeholder}
         className={color}
-        onBlur={addClientInfo} 
+        onBlur={addClientInfo}
       />
     );
   }

@@ -14,7 +14,7 @@ class Checkout extends Component {
       paymentMethod: false,
       isShouldRedirect: false,
       errors: {},
-      toBlur: '',
+      toBlur: [],
     };
     this.addClientInfo = this.addClientInfo.bind(this);
     this.addPaymentMethod = this.addPaymentMethod.bind(this);
@@ -26,48 +26,36 @@ class Checkout extends Component {
 
   addClientInfo(Info) {
     const { name, value } = Info.target;
-    const { clientInfo, errors } = this.state;
-    const validEmailRegex = RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
-    if (value === '') Info.target.style.border = '1px solid red';
+    const { clientInfo, errors, toBlur } = this.state;
+    const validEmailRegex = RegExp(/^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i);
+    if (value === '') this.setState({ toBlur: [...toBlur, name] });
     switch (name) {
       case 'CPF':
         if (value.length < 11) {
           errors.CPF = 'Insira um CPF válido';
-          Info.target.style.border = '1px solid red';
+          this.setState({ toBlur: [...toBlur, name] });
         } else {
           errors.CPF = '';
-          Info.target.style.border = '1px solid grey';
+          this.setState({ toBlur: [] });
         }
         break;
       case 'Email':
         if (!validEmailRegex.test(value)) {
           errors.Email = 'Insira um email válido';
-          Info.target.style.border = '1px solid red';
+          this.setState({ toBlur: [...toBlur, name] });
         } else {
           errors.Email = '';
-          Info.target.style.border = '1px solid grey';
-        }
-        break;
-      case 'Telefone':
-        if (value.length < 12) {
-          errors.Telefone = 'Insira um telefone válido';
-          Info.target.style.border = '1px solid red';
-        } else {
-          errors.Telefone = '';
-          Info.target.style.border = '1px solid grey';
-        }
-        break;
-      case 'CEP':
-        if (value.length < 8) {
-          errors.CEP = 'Insira um CEP válido';
-          Info.target.style.border = '1px solid red';
-        } else {
-          errors.CEP = '';
-          Info.target.style.border = '1px solid grey';
+          this.setState({ toBlur: [] });
         }
         break;
       default:
-        Info.target.style.border = '1px solid grey';
+        if (value === '') {
+          // errors.name = 'Insira um email válido';
+          this.setState({ toBlur: [...toBlur, name] })
+        } else {
+          // errors.name = '';
+          this.setState({ toBlur: [] });
+        }
         break;
     }
 
@@ -77,7 +65,6 @@ class Checkout extends Component {
         [name]: value,
       },
       errors,
-      toBlur: '',
     });
   }
 
