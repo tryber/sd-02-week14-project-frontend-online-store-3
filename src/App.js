@@ -1,12 +1,11 @@
 import React from 'react';
-// import Checkout from './pages/Checkout';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import SearchBar from './pages/SearchBar';
+import Checkout from './pages/Checkout';
 import ShoppingCart from './pages/ShoppingCart';
 import NotFound from './pages/NotFound';
-import './App.css';
 import ProductDetails from './pages/ProductDetails';
-// import ProductList from './components/ProductList';
+import SearchBar from './pages/SearchBar';
+import './App.css';
 
 function App() {
   return (
@@ -16,6 +15,7 @@ function App() {
           <Route exact path="/" component={SearchBar} />
           <Route path="/products/:id" component={ProductDetails} />
           <Route path="/shopping_cart" component={ShoppingCart} />
+          <Route path="/checkout" component={Checkout} />
           <Route path="*" component={NotFound} />
         </Switch>
       </BrowserRouter>

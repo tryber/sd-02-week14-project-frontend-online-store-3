@@ -6,7 +6,9 @@ import AddCartInitialPage from './AddCartInitialPage';
 
 class ProductItem extends Component {
   render() {
-    const { title, thumbnail, price, id } = this.props;
+    const {
+      title, thumbnail, price, id, quantity, realPrice, productInfo,
+    } = this.props;
     return (
       <div className="product-item">
         <div>
@@ -14,7 +16,9 @@ class ProductItem extends Component {
             to={{
               pathname: `/products/${id}`,
               state: {
-                product: this.props,
+                product: {
+                  title, thumbnail, price, id, quantity, realPrice, productInfo,
+                },
               },
             }}
           >
@@ -40,6 +44,9 @@ ProductItem.propTypes = {
   thumbnail: PropTypes.string.isRequired,
   price: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
+  quantity: PropTypes.number.isRequired,
+  realPrice: PropTypes.number.isRequired,
+  productInfo: PropTypes.func.isRequired,
 };
 
 export default ProductItem;

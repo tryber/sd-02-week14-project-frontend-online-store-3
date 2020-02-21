@@ -1,8 +1,11 @@
-import PropTypes from 'prop-types';
 import React from 'react';
 
-function ReviewCart(props) {
-  const { cart, totalPrice } = props;
+function ReviewCart() {
+  const cart = JSON.parse(localStorage.getItem('products'));
+  const totalPrice = localStorage.getItem('totalPrice');
+  if (cart === null) {
+    return <h1>Carrinho vazio</h1>;
+  }
   return (
     <div className="review-cart">
       <h2>Revise seus Produtos</h2>
@@ -27,16 +30,5 @@ function ReviewCart(props) {
     </div>
   );
 }
-
-ReviewCart.propTypes = {
-  cart: PropTypes.shape({
-    title: PropTypes.string,
-    thumbnail: PropTypes.string,
-    quantity: PropTypes.string,
-    price: PropTypes.number,
-    id: PropTypes.string,
-  }).isRequired,
-  totalPrice: PropTypes.string.isRequired,
-};
 
 export default ReviewCart;
