@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import PaymentMethod from '../components/PaymentMethod';
@@ -55,7 +54,7 @@ class Checkout extends Component {
 
   validationForm(name, value) {
     const { errors, toBlur } = this.state;
-    const validEmailRegex = RegExp(/^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i);
+    // const validEmailRegex = RegExp(/^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i);
     if (value === '') this.setState({ toBlur: [...toBlur, name] });
     switch (name) {
       case 'CPF':
@@ -67,8 +66,9 @@ class Checkout extends Component {
           this.setState({ errors, toBlur: [] });
         }
         break;
+        // !validEmailRegex.test(value)
       case 'Email':
-        if (!validEmailRegex.test(value)) {
+        if (value.length < 11) {
           errors.Email = 'Insira um email válido';
           this.setState({ errors, toBlur: [...toBlur, name] });
         } else {
