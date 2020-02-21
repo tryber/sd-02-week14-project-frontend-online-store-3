@@ -4,11 +4,7 @@ function ReviewCart() {
   const cart = JSON.parse(localStorage.getItem('products'));
   const totalPrice = localStorage.getItem('totalPrice');
   if (cart === null) {
-    return (
-      <div>
-        <h1>Carrinho vazio</h1>
-      </div>
-    );
+    return <h1>Carrinho vazio</h1>;
   }
   return (
     <div className="review-cart">
