@@ -63,7 +63,6 @@ class Checkout extends Component {
         [name]: value,
       },
       errors,
-      [name]: value,
       toBlur: '',
     });
   }
@@ -81,15 +80,16 @@ class Checkout extends Component {
   }
 
   validateForm() {
-    const { paymentMethod, errors } = this.state;
+    const { errors } = this.state;
     const valid = Object.values(errors).every((value) => value === '');
-    return (valid && paymentMethod);
+    return valid;
   }
 
   handleSubmit(event) {
+    const { clientInfo, paymentMethod } = this.state;
     event.preventDefault();
-    if (this.validateForm()) {
-      const { clientInfo, paymentMethod } = this.state;
+    if (!paymentMethod) alert('Você precisa selecionar uma forma de pagamento.');
+    else if (this.validateForm()) {
       console.info('Valid Form');
       localStorage.clear();
       localStorage.setItem('checkout', JSON.stringify([clientInfo, paymentMethod]));
@@ -103,8 +103,11 @@ class Checkout extends Component {
 
   blurForms() {
     const { errors } = this.state;
-    const toBlur = Object.values(errors).filter((value) => value !== '').name;
-    console.log(toBlur);
+    let toBlur = [];
+    Object.entries(errors).forEach((key) => {
+      if (key[1] !== '') toBlur = [...toBlur, key[0]];
+    });
+    this.setState({ toBlur });
   }
 
   render() {
