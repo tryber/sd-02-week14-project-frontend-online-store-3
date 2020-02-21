@@ -3,7 +3,6 @@ import { Redirect } from 'react-router-dom';
 import PaymentMethod from '../components/PaymentMethod';
 import ClientInfo from '../components/ClientInfo';
 import ReviewCart from '../components/ReviewCart';
-// import returnButton from '../imgs/return.svg';
 import './Checkout.css';
 
 class Checkout extends Component {
@@ -11,21 +10,21 @@ class Checkout extends Component {
     super(props);
     this.state = {
       clientInfo: {},
-      paymentMethod: '',
+      paymentMethod: false,
       isShouldRedirect: false,
-      cart: JSON.parse(localStorage.getItem('products')),
-      totalPrice: localStorage.getItem('totalPrice'),
+      toBlur: [],
     };
-
     this.addClientInfo = this.addClientInfo.bind(this);
     this.addPaymentMethod = this.addPaymentMethod.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleRedirect = this.handleRedirect.bind(this);
+    this.validateForm = this.validateForm.bind(this);
   }
 
   addClientInfo(Info) {
     const { name, value } = Info.target;
     const { clientInfo } = this.state;
+    this.validateForm(name, value);
     this.setState({
       clientInfo: {
         ...clientInfo,
@@ -45,19 +44,65 @@ class Checkout extends Component {
     });
   }
 
+  validateForm(name, value) {
+    const { toBlur } = this.state;
+    switch (name) {
+      case 'CPF':
+        this.validateCPF(name, value, toBlur);
+        break;
+      case 'Email':
+        this.validateEmail(name, value, toBlur);
+        break;
+      default:
+        this.validateDefault(name, value, toBlur);
+        break;
+    }
+  }
+
+  validateCPF(name, value, toBlur) {
+    if (value.length < 11) {
+      this.setState({ toBlur: [...toBlur, name] });
+    } else {
+      const clean = toBlur.filter((el) => el !== name);
+      this.setState({ toBlur: [...clean] });
+    }
+  }
+
+  validateEmail(name, value, toBlur) {
+    if (value.length < 11) {
+      this.setState({ toBlur: [...toBlur, name] });
+    } else {
+      const clean = toBlur.filter((el) => el !== name);
+      this.setState({ toBlur: [...clean] });
+    }
+  }
+
+  validateDefault(name, value, toBlur) {
+    if (value === '') {
+      this.setState({ toBlur: [...toBlur, name] });
+    } else {
+      const clean = toBlur.filter((el) => el !== name);
+      this.setState({ toBlur: [...clean] });
+    }
+  }
+
   handleSubmit(event) {
-    const {
-      clientInfo, paymentMethod, cart, totalPrice,
-    } = this.state;
-    localStorage.setItem('checkout', JSON.stringify([clientInfo, paymentMethod, cart, totalPrice]));
-    alert(`Parabéns, você contraiu uma dívida de: ${this.state.totalPrice}`);
     event.preventDefault();
-    this.handleRedirect();
+    const { clientInfo, paymentMethod, toBlur } = this.state;
+    if (!paymentMethod) alert('Você precisa selecionar uma forma de pagamento.');
+    else if (toBlur.length === 0) {
+      localStorage.clear();
+      localStorage.setItem('checkout', JSON.stringify([clientInfo, paymentMethod]));
+      alert(`${clientInfo.nome}, vem pra Trybe!`);
+      this.handleRedirect();
+    } else {
+      alert('Você precisa preencher os campos em vermelho corretamente!');
+    }
   }
 
   render() {
     const {
-      isShouldRedirect, paymentMethod, cart, totalPrice,
+      isShouldRedirect, paymentMethod, toBlur,
     } = this.state;
     if (isShouldRedirect) return <Redirect to="/" />;
     return (
@@ -65,8 +110,8 @@ class Checkout extends Component {
         <div>
           <button type="button" onClick={this.handleRedirect}>VOLTAR</button>
         </div>
-        <ReviewCart cart={cart} totalPrice={totalPrice} />
-        <ClientInfo addClientInfo={(event) => this.addClientInfo(event)} />
+        <ReviewCart />
+        <ClientInfo addClientInfo={(event) => this.addClientInfo(event)} toBlur={toBlur} />
         <PaymentMethod
           addPaymentMethod={this.addPaymentMethod}
           paymentMethod={paymentMethod}
