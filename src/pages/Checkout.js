@@ -33,7 +33,7 @@ class Checkout extends Component {
     });
   }
 
-  addPaymentMethod(paymentMethod) {    
+  addPaymentMethod(paymentMethod) {
     this.setState(() => ({ paymentMethod }));
   }
 
