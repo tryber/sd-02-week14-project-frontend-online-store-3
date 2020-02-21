@@ -28,35 +28,49 @@ class Checkout extends Component {
     const { name, value } = Info.target;
     const { clientInfo, errors } = this.state;
     const validEmailRegex = RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
+    if (value === '') Info.target.style.border = '1px solid red';
     switch (name) {
-      case 'nome':
-        errors.nome = value.length < 5
-          ? 'O nome completo deve possuir mais de 5 letras'
-          : '';
-        break;
       case 'CPF':
-        errors.CPF = value.length < 5
-          ? 'Insira um CPF válido'
-          : '';
+        if (value.length < 11) {
+          errors.CPF = 'Insira um CPF válido';
+          Info.target.style.border = '1px solid red';
+        } else {
+          errors.CPF = '';
+          Info.target.style.border = '1px solid grey';
+        }
         break;
       case 'Email':
-        errors.Email = validEmailRegex.test(value)
-          ? ''
-          : 'Email inválido';
+        if (!validEmailRegex.test(value)) {
+          errors.Email = 'Insira um email válido';
+          Info.target.style.border = '1px solid red';
+        } else {
+          errors.Email = '';
+          Info.target.style.border = '1px solid grey';
+        }
         break;
       case 'Telefone':
-        errors.Telefone = value.length < 5
-          ? ''
-          : 'Telefone não existe';
+        if (value.length < 12) {
+          errors.Telefone = 'Insira um telefone válido';
+          Info.target.style.border = '1px solid red';
+        } else {
+          errors.Telefone = '';
+          Info.target.style.border = '1px solid grey';
+        }
         break;
       case 'CEP':
-        errors.CEP = value.length < 5
-          ? ''
-          : 'CEP inexistente';
+        if (value.length < 8) {
+          errors.CEP = 'Insira um CEP válido';
+          Info.target.style.border = '1px solid red';
+        } else {
+          errors.CEP = '';
+          Info.target.style.border = '1px solid grey';
+        }
         break;
       default:
+        Info.target.style.border = '1px solid grey';
         break;
     }
+
     this.setState({
       clientInfo: {
         ...clientInfo,
@@ -66,7 +80,6 @@ class Checkout extends Component {
       toBlur: '',
     });
   }
-
 
   addPaymentMethod(paymentMethod) {
     console.log(paymentMethod);
@@ -90,13 +103,12 @@ class Checkout extends Component {
     event.preventDefault();
     if (!paymentMethod) alert('Você precisa selecionar uma forma de pagamento.');
     else if (this.validateForm()) {
-      console.info('Valid Form');
       localStorage.clear();
       localStorage.setItem('checkout', JSON.stringify([clientInfo, paymentMethod]));
       alert(`${clientInfo.nome}, vem pra Trybe!`);
       this.handleRedirect();
     } else {
-      console.error('Invalid Form');
+      alert('Você precisa preencher os campos em vermelho corretamente!');
       this.blurForms();
     }
   }

@@ -20,7 +20,7 @@ class ClientInfo extends Component {
         name={name}
         placeholder={placeholder}
         className={color}
-        onChange={addClientInfo}
+        onBlur={addClientInfo} 
       />
     );
   }
