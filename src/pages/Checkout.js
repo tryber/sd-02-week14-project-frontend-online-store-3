@@ -33,8 +33,7 @@ class Checkout extends Component {
     });
   }
 
-  addPaymentMethod(paymentMethod) {
-    console.log(paymentMethod);
+  addPaymentMethod(paymentMethod) {    
     this.setState(() => ({ paymentMethod }));
   }
 
@@ -89,14 +88,15 @@ class Checkout extends Component {
   handleSubmit(event) {
     event.preventDefault();
     const { clientInfo, paymentMethod, toBlur } = this.state;
+    console.log(clientInfo);
     if (!paymentMethod) alert('Você precisa selecionar uma forma de pagamento.');
-    else if (toBlur.length === 0) {
+    else if (!clientInfo.nome || toBlur.length !== 0) {
+      alert('Você precisa preencher os campos em vermelho corretamente!');
+    } else if (toBlur.length === 0) {
       localStorage.clear();
       localStorage.setItem('checkout', JSON.stringify([clientInfo, paymentMethod]));
       alert(`${clientInfo.nome}, vem pra Trybe!`);
-      this.handleRedirect();
-    } else {
-      alert('Você precisa preencher os campos em vermelho corretamente!');
+      // this.handleRedirect();
     }
   }
 
