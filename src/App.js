@@ -1,6 +1,6 @@
 import React from 'react';
-import Checkout from './pages/Checkout';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import Checkout from './pages/Checkout';
 // import SearchBar from './pages/SearchBar';
 import ShoppingCart from './pages/ShoppingCart';
 import NotFound from './pages/NotFound';
