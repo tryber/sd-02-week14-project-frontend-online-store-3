@@ -12,7 +12,6 @@ class Checkout extends Component {
       clientInfo: {},
       paymentMethod: false,
       isShouldRedirect: false,
-      errors: {},
       toBlur: [],
     };
     this.addClientInfo = this.addClientInfo.bind(this);
@@ -20,13 +19,12 @@ class Checkout extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleRedirect = this.handleRedirect.bind(this);
     this.validateForm = this.validateForm.bind(this);
-    this.blurForms = this.blurForms.bind(this);
   }
 
   addClientInfo(Info) {
     const { name, value } = Info.target;
     const { clientInfo } = this.state;
-    this.validationForm(name, value);
+    this.validateForm(name, value);
     this.setState({
       clientInfo: {
         ...clientInfo,
@@ -46,70 +44,48 @@ class Checkout extends Component {
     });
   }
 
-  validateForm() {
-    const { errors } = this.state;
-    const valid = Object.values(errors).every((value) => value === '');
-    return (valid);
-  }
-
-  validationForm(name, value) {
-    const { errors, toBlur } = this.state;
-    // const validEmailRegex = RegExp(/^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i);
-    if (value === '') this.setState({ toBlur: [...toBlur, name] });
+  validateForm(name, value) {
+    const { toBlur } = this.state;
     switch (name) {
       case 'CPF':
         if (value.length < 11) {
-          errors.CPF = 'Insira um CPF válido';
-          this.setState({ errors, toBlur: [...toBlur, name] });
+          this.setState({ toBlur: [...toBlur, name] });
         } else {
-          errors.CPF = '';
-          this.setState({ errors, toBlur: [] });
+          const clean = toBlur.filter((el) => el !== name);
+          this.setState({ toBlur: [...clean] });
         }
         break;
-        // !validEmailRegex.test(value)
       case 'Email':
         if (value.length < 11) {
-          errors.Email = 'Insira um email válido';
-          this.setState({ errors, toBlur: [...toBlur, name] });
+          this.setState({ toBlur: [...toBlur, name] });
         } else {
-          errors.Email = '';
-          this.setState({ errors, toBlur: [] });
+          const clean = toBlur.filter((el) => el !== name);
+          this.setState({ toBlur: [...clean] });
         }
         break;
       default:
         if (value === '') {
-          errors.name = 'Algum problema';
-          this.setState({ errors, toBlur: [...toBlur, name] });
+          this.setState({ toBlur: [...toBlur, name] });
         } else {
-          errors.name = '';
-          this.setState({ errors, toBlur: [] });
+          const clean = toBlur.filter((el) => el !== name);
+          this.setState({ toBlur: [...clean] });
         }
         break;
     }
   }
 
   handleSubmit(event) {
-    const { clientInfo, paymentMethod } = this.state;
     event.preventDefault();
+    const { clientInfo, paymentMethod, toBlur } = this.state;
     if (!paymentMethod) alert('Você precisa selecionar uma forma de pagamento.');
-    else if (this.validateForm()) {
+    else if (toBlur === []) {
       localStorage.clear();
       localStorage.setItem('checkout', JSON.stringify([clientInfo, paymentMethod]));
       alert(`${clientInfo.nome}, vem pra Trybe!`);
       this.handleRedirect();
     } else {
       alert('Você precisa preencher os campos em vermelho corretamente!');
-      this.blurForms();
     }
-  }
-
-  blurForms() {
-    const { errors } = this.state;
-    let toBlur = [];
-    Object.entries(errors).forEach((key) => {
-      if (key[1] !== '') toBlur = [...toBlur, key[0]];
-    });
-    this.setState({ toBlur });
   }
 
   render() {
