@@ -1,7 +1,7 @@
 import React from 'react';
-// import Checkout from './pages/Checkout';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import SearchBar from './pages/SearchBar';
+import Checkout from './pages/Checkout';
+// import SearchBar from './pages/SearchBar';
 import ShoppingCart from './pages/ShoppingCart';
 import NotFound from './pages/NotFound';
 import ProductDetails from './pages/ProductDetails';
@@ -14,7 +14,7 @@ function App() {
     <main>
       <BrowserRouter>
         <Switch>
-          <Route exact path="/" component={SearchBar} />
+          <Route exact path="/" component={Checkout} />
           <Route path="/products/:id" component={ProductDetails} />
           <Route path="/shopping_cart" component={ShoppingCart} />
           <Route path="/checkout" component={Checkout} />
