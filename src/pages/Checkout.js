@@ -98,11 +98,11 @@ class Checkout extends Component {
       this.handleRedirect();
     }
   }
-
+//
   render() {
     const {
-      isShouldRedirect, paymentMethod, toBlur,
-    } = this.state;
+      isShouldRedirect, paymentMethod, toBluraa
+    } = this.state;,
     if (isShouldRedirect) return <Redirect to="/" />;
     return (
       <div className="checkout-page">
