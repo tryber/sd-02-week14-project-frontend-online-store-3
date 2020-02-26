@@ -37,7 +37,6 @@
 .payment-method form {
   display: flex;
   flex-direction: row;
-
 }
 
 .payment-method form div {
@@ -51,6 +50,11 @@
   justify-content: space-between;
 }
 
+.radio img {  
+  margin-left: 20px;
+  width: 30px;
+}
+
 .submit-button {
-  padding: 10px;
+  margin-top: 10px;
 }

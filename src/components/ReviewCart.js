@@ -27,8 +27,7 @@ function ReviewCart() {
         </tbody>
       </table>
       <h4 className="price">
-        Total:
-        {totalPrice}
+        {`Total da compra:    ${totalPrice}`}
       </h4>
     </div>
   );
