@@ -5,6 +5,7 @@ import ShoppingCart from './pages/ShoppingCart';
 import NotFound from './pages/NotFound';
 import ProductDetails from './pages/ProductDetails';
 import SearchBar from './pages/SearchBar';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
 function App() {

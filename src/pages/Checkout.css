@@ -12,11 +12,45 @@
   padding: 20px;
 }
 
+.price{
+  padding: 10px;
+}
+
 .review-cart {
   border: 1px solid black;
   padding: 20px;
 }
 
-.commit{
-  aaa
+.return-button {
+  background-color: white;
+  background-image: url('../imgs/return.svg');
+  border: none;
+  height: 50px;
+  margin: 0;
+  width: 50px;
+}
+
+.review-cart table td {
+ padding: 15px;
+}
+
+.payment-method form {
+  display: flex;
+  flex-direction: row;
+
+}
+
+.payment-method form div {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
+}
+
+.radio {
+  display: inline;
+  justify-content: space-between;
+}
+
+.submit-button {
+  padding: 10px;
 }

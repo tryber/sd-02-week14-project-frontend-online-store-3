@@ -1,3 +1,14 @@
+.client-form form {
+  display: flex;
+  flex-wrap: wrap;
+  
+}
+
+.client-form form input, select {
+  margin: 10px;
+  border-radius: 10%;
+}
+
 .red {
   border: red solid 1px;
 }

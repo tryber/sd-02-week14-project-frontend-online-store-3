@@ -1,4 +1,3 @@
-/* eslint-disable no-useless-escape */
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import PaymentMethod from '../components/PaymentMethod';
@@ -138,7 +137,7 @@ class Checkout extends Component {
     return (
       <div className="checkout-page">
         <div>
-          <button type="button" onClick={this.handleRedirect}>VOLTAR</button>
+          <button label="return" type="button" onClick={this.handleRedirect} className="return-button" />
         </div>
         <ReviewCart />
         <ClientInfo addClientInfo={(event) => this.addClientInfo(event)} toBlur={toBlur} />
@@ -147,7 +146,7 @@ class Checkout extends Component {
           paymentMethod={paymentMethod}
         />
         <div className="submit-button">
-          <button type="button" onClick={this.handleSubmit}>Comprar</button>
+          <button type="button" onClick={this.handleSubmit}>Concluir</button>
         </div>
       </div>
     );
