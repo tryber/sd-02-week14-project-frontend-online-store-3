@@ -31,10 +31,10 @@ class ClientInfo extends Component {
       <div>
         <form>
           {this.createOption('text', 'nome', 'Nome Completo')}
-          {this.createOption('number', 'CPF', 'CPF')}
+          {this.createOption('text', 'CPF', 'CPF')}
           {this.createOption('email', 'Email', 'Email')}
-          {this.createOption('number', 'Telefone', 'Telefone')}
-          {this.createOption('number', 'CEP', 'CEP')}
+          {this.createOption('text', 'Telefone', 'Telefone')}
+          {this.createOption('text', 'CEP', 'CEP')}
           {this.createOption('text', 'Endereço', 'Endereço')}
           {this.createOption('text', 'Complemento', 'Complemento')}
           {this.createOption('number', 'Número', 'Número')}

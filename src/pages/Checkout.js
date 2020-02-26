@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import PaymentMethod from '../components/PaymentMethod';
@@ -52,6 +53,12 @@ class Checkout extends Component {
       case 'Email':
         this.validateEmail(name, value, toBlur);
         break;
+      case 'Telefone':
+        this.validateTelefone(name, value, toBlur);
+        break;
+      case 'CEP':
+        this.validateCEP(name, value, toBlur);
+        break;
       default:
         this.validateDefault(name, value, toBlur);
         break;
@@ -59,7 +66,8 @@ class Checkout extends Component {
   }
 
   validateCPF(name, value, toBlur) {
-    if (value.length < 11) {
+    const validCPF = RegExp(/[0-9]{3}\.?[0-9]{3}\.?[0-9]{3}\-?[0-9]{2}/);
+    if (!validCPF.test(value)) {
       this.setState({ toBlur: [...toBlur, name] });
     } else {
       const clean = toBlur.filter((el) => el !== name);
@@ -68,7 +76,28 @@ class Checkout extends Component {
   }
 
   validateEmail(name, value, toBlur) {
-    if (value.length < 11) {
+    const validEmailRegex = RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
+    if (!validEmailRegex.test(value)) {
+      this.setState({ toBlur: [...toBlur, name] });
+    } else {
+      const clean = toBlur.filter((el) => el !== name);
+      this.setState({ toBlur: [...clean] });
+    }
+  }
+
+  validateCEP(name, value, toBlur) {
+    const validCEP = RegExp(/^[0-9]{8}$/);
+    if (!validCEP.test(value)) {
+      this.setState({ toBlur: [...toBlur, name] });
+    } else {
+      const clean = toBlur.filter((el) => el !== name);
+      this.setState({ toBlur: [...clean] });
+    }
+  }
+
+  validateTelefone(name, value, toBlur) {
+    const validTelefone = RegExp(/^(?:(?:\+|00)?(55)\s?)?(?:\(?([1-9][0-9])\)?\s?)?(?:((?:9\d|[2-9])\d{3})\-?(\d{4}))$/);
+    if (!validTelefone.test(value)) {
       this.setState({ toBlur: [...toBlur, name] });
     } else {
       const clean = toBlur.filter((el) => el !== name);
@@ -89,9 +118,11 @@ class Checkout extends Component {
     event.preventDefault();
     const { clientInfo, paymentMethod, toBlur } = this.state;
     if (!paymentMethod) alert('Você precisa selecionar uma forma de pagamento.');
-    else if (!clientInfo.nome || toBlur.length !== 0) {
-      alert('Você precisa preencher os campos em vermelho corretamente!');
-    } else if (toBlur.length === 0) {
+    else if (!clientInfo.nome) {
+      alert('Você não preencheu nada!');
+    } else if (toBlur.length !== 0) {
+      alert('Você precisa preencher os campos corretamente!');
+    } else {
       localStorage.clear();
       localStorage.setItem('checkout', JSON.stringify([clientInfo, paymentMethod]));
       alert(`${clientInfo.nome}, vem pra Trybe!`);
