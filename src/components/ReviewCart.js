@@ -8,8 +8,8 @@ function ReviewCart() {
   }
   return (
     <div className="review-cart">
-      <h2>Revise seus Produtos</h2>
-      <table className="shoppingCart">
+      <h3>Revise seus Produtos</h3>
+      <table className="">
         <tbody>
           {cart.map(({
             thumbnail, title, quantity, price, id,
@@ -17,16 +17,18 @@ function ReviewCart() {
             <tr key={id}>
               <td><img src={thumbnail} alt="imagem do produto" /></td>
               <td>{title}</td>
-              <td>{quantity}</td>
+              <td>
+                <span>Qtd.</span>
+                {quantity}
+              </td>
               <td>{price}</td>
             </tr>
           ))}
         </tbody>
       </table>
-      <h2>
-        Total:
-        {totalPrice}
-      </h2>
+      <h4 className="price">
+        {`Total da compra:    ${totalPrice}`}
+      </h4>
     </div>
   );
 }
