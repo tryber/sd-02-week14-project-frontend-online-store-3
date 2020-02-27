@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import ProductList from '../components/ProductList';
 import * as productAPI from '../services/productAPI';
-// import lupa from '../imgs/search.svg';
 import './SearchBar.css';
 
 class SearchBar extends Component {
@@ -54,9 +53,6 @@ class SearchBar extends Component {
     const { totalItems } = this.state;
     return (
       <div className="header">
-        {/* <div>
-        <img src={lupa} alt="lupa" className="lupa" onClick={this.onSearchTextChange} />
-        </div> */}
         <label htmlFor="text">
           <input
             id="text"
