@@ -10,9 +10,9 @@
 
 .cart {
   background-color: white;
-  color: white;
   background-image: url('../imgs/cart.svg');
   border: none;
+  color: white;
   height: 50px;
   margin: 0;
   width: 50px;
