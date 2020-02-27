@@ -138,8 +138,12 @@ class Checkout extends Component {
     return (
       <div className="checkout-page">
         <div>
-          <button label="return" type="button"
-            onClick={this.handleRedirect} className="return-button" />
+          <button
+            label="return"
+            type="button"
+            onClick={this.handleRedirect}
+            className="return-button"
+          />
         </div>
         <ReviewCart />
         <ClientInfo addClientInfo={(event) => this.addClientInfo(event)} toBlur={toBlur} />
