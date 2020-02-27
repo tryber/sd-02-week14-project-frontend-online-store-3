@@ -132,7 +132,7 @@ class ShoppingCart extends React.Component {
     const { productsArr } = this.state;
     this.totalCartItems();
     localStorage.setItem('products', JSON.stringify(productsArr));
-    if (productsArr) {
+    if (productsArr && (productsArr.length !== 0)) {
       return (
         <div className="div_content">
           <Link to="/"><span>Voltar</span></Link>

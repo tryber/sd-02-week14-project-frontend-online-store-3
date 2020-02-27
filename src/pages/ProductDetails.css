@@ -17,7 +17,8 @@
   border-radius: 100%;
   font-size: 1.5rem;
   height: 3rem;
-  margin-top: 1rem;
+  margin-top: 1.5rem;
+  padding-top: 5px;
   text-align: center;
   width: 3rem;
 }
@@ -36,6 +37,16 @@
 
 .attribute {
   margin-left: 2rem;
+}
+
+.back_container {
+  display: flex;
+  justify-content: space-between;
+  width: 1000px;
+}
+
+button {
+  cursor: pointer;
 }
 
 .product_attributes {
@@ -61,6 +72,15 @@
 
 .product_counter:hover {
   cursor: pointer;
+}
+
+.return-button {
+  background-color: white;
+  background-image: url('../imgs/return.svg');
+  border: none;
+  height: 50px;
+  margin: 0;
+  width: 50px;
 }
 
 .title {
