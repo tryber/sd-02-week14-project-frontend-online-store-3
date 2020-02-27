@@ -26,9 +26,21 @@ class ShoppingCart extends React.Component {
     this.x = '-';
     return (
       <div className="flex_qtd_container">
-        <button type="button" onClick={() => this.changeQuantity('down', id)}>{this.x}</button>
+        <button
+          className="button_content"
+          type="button"
+          onClick={() => this.changeQuantity('down', id)}
+        >
+          {this.x}
+        </button>
         <input type="input" className="input_qtd" value={quantity} />
-        <button type="button" onClick={() => this.changeQuantity('up', id)}>+</button>
+        <button
+          className="button_content"
+          type="button"
+          onClick={() => this.changeQuantity('up', id)}
+        >
+          +
+        </button>
       </div>
     );
   }
@@ -45,7 +57,14 @@ class ShoppingCart extends React.Component {
     this.x = 'x';
     return (
       <div>
-        <button type="button" id={id} onClick={this.removeFromCart}>{this.x}</button>
+        <button
+          className="button_content"
+          type="button"
+          id={id}
+          onClick={this.removeFromCart}
+        >
+          {this.x}
+        </button>
       </div>
     );
   }

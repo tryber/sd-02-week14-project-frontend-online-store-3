@@ -7,7 +7,7 @@ body {
   padding-top: 40px;
 }
 
-button {
+.button_content {
   background-color: transparent;
   border: none;
   font-size: 30px;
