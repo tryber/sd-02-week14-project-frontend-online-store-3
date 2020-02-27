@@ -74,6 +74,15 @@ button {
   cursor: pointer;
 }
 
+.return-button {
+  background-color: white;
+  background-image: url('../imgs/return.svg');
+  border: none;
+  height: 50px;
+  margin: 0;
+  width: 50px;
+}
+
 .title {
   margin-left: 2rem;
 }

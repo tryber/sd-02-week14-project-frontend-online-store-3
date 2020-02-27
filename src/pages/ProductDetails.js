@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import CustomerRating from '../components/CustomerRating';
 import './ProductDetails.css';
 import * as productAPI from '../services/productAPI';
@@ -16,6 +16,7 @@ class ProductDetails extends Component {
       attributes: [],
       productCount: quantity,
       isShouldRedirect: false,
+      redirectPage: '',
       totalItems: parseInt(localStorage.getItem('totalItems'), 10) || 0,
     };
 
@@ -35,9 +36,10 @@ class ProductDetails extends Component {
       }))));
   }
 
-  onChangeRedirect() {
+  onChangeRedirect(string) {
     this.setState({
       isShouldRedirect: true,
+      redirectPage: string,
     });
   }
 
@@ -81,10 +83,15 @@ class ProductDetails extends Component {
     return (
       <div className="back_container">
         <div>
-          <Link to="/">Voltar</Link>
+          <button
+            label="return"
+            type="button"
+            onClick={() => this.onChangeRedirect('/')}
+            className="return-button"
+          />
         </div>
         <div>
-          <button type="button" className="cart" onClick={this.onChangeRedirect}>
+          <button type="button" className="cart" onClick={() => this.onChangeRedirect('/shopping_cart')}>
             <p>{localStorage.getItem('totalItems') || 0}</p>
           </button>
         </div>
@@ -120,8 +127,8 @@ class ProductDetails extends Component {
   render() {
     const { product } = this.props.location.state;
     const { title, thumbnail, price } = product;
-    const { attributes, isShouldRedirect } = this.state;
-    if (isShouldRedirect) return <Redirect to="/shopping_cart" />;
+    const { attributes, isShouldRedirect, redirectPage } = this.state;
+    if (isShouldRedirect) return <Redirect to={redirectPage} />;
     return (
       <div>
         {this.backButtonAndCart()}

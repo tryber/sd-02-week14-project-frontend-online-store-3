@@ -41,6 +41,8 @@ class CustomerRating extends Component {
   }
 
   saveRating() {
+    const { email } = this.state;
+    if (!email) return alert('Email e Avaliação obrigatorios');
     if (!localStorage.comments) {
       localStorage.setItem('comments', JSON.stringify([this.state]));
       this.setState({ status: true });
