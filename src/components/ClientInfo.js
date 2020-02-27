@@ -28,7 +28,7 @@ class ClientInfo extends Component {
   renderClientInfo() {
     const { addClientInfo } = this.props;
     return (
-      <div>
+      <div className="client-form">
         <form>
           {this.createOption('text', 'nome', 'Nome Completo')}
           {this.createOption('text', 'CPF', 'CPF')}
