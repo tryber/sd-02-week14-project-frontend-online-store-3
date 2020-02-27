@@ -53,19 +53,19 @@ class ShoppingCart extends React.Component {
   createProductInfos(title, thumbnail, price, id, quantity) {
     return (
       <div key={id} className="flex_cart_container">
-        <div>
+        <div className="align">
           {this.createRemoveButton(id)}
         </div>
-        <div>
+        <div className="align, image_content">
           <img src={thumbnail} alt={`imagem de um ${title}`} />
         </div>
-        <div className="title_content">
+        <div className="title_content align">
           {title}
         </div>
-        <div>
+        <div className="align quantity_button">
           {this.createQtdButton(quantity, id)}
         </div>
-        <div>
+        <div className="align">
           {price}
         </div>
       </div>
@@ -101,8 +101,10 @@ class ShoppingCart extends React.Component {
     localStorage.setItem('totalPrice', totalPrice);
     return (
       <div>
-        Valor total da compra:
-        {totalPrice}
+        <h2>
+          Valor total da compra:
+          {totalPrice}
+        </h2>
       </div>
     );
   }
@@ -114,8 +116,11 @@ class ShoppingCart extends React.Component {
     if (productsArr) {
       return (
         <div className="div_content">
-          <Link to="/">Voltar</Link>
+          <Link to="/"><span>Voltar</span></Link>
           <div className="div_container">
+            <div>
+              <h2>Carrinho de compras: </h2>
+            </div>
             {productsArr.map(({
               title, thumbnail, price, id, quantity,
             }) => this.createProductInfos(title, thumbnail, price, id, quantity))}
@@ -123,14 +128,14 @@ class ShoppingCart extends React.Component {
           <div className="div_container">
             {this.totalPrice()}
           </div>
-          <Link to="/checkout">FInalizar</Link>
+          <Link to="/checkout"><span>Finalizar compra</span></Link>
         </div>
       );
     }
     return (
       <div>
-        <Link to="/">Voltar</Link>
-        <p>Vazio</p>
+        <Link to="/"><span>Voltar</span></Link>
+        <p className="empty_content">Carrinho vazio</p>
       </div>
     );
   }
