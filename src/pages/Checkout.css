@@ -12,7 +12,7 @@
   padding: 20px;
 }
 
-.price{
+.price {
   padding: 10px;
 }
 
@@ -31,7 +31,7 @@
 }
 
 .review-cart table td {
- padding: 15px;
+  padding: 15px;
 }
 
 .payment-method form {
@@ -50,7 +50,7 @@
   justify-content: space-between;
 }
 
-.radio img {  
+.radio img {
   margin-left: 20px;
   width: 30px;
 }
