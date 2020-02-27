@@ -72,12 +72,23 @@ class SearchBar extends Component {
   createCategories() {
     const { categories } = this.state;
     return (
-      <label htmlFor="categories">
-        Categorias
-        <select id="categories" onChange={this.onSelectedCategoryChange}>
-          {categories.map(({ name, id }) => (<option key={id} value={name}>{name}</option>))}
-        </select>
-      </label>
+      <div>
+        <p>Categorias: </p>
+        {categories.map(({ name, id }) => (
+          <div>
+            <input
+              className="categories"
+              type="radio"
+              key={id}
+              id={id}
+              name="categories"
+              value={name}
+              onChange={this.onSelectedCategoryChange}
+            />
+            <label className="categories" htmlFor={id}>{name}</label>
+          </div>
+        ))}
+      </div>
     );
   }
 
@@ -91,10 +102,10 @@ class SearchBar extends Component {
     const { query, isShouldRedirect, categorySelected } = this.state;
     if (isShouldRedirect) return <Redirect to="/shopping_cart" />;
     return (
-      <div className="main-page">
+      <div className="main_page">
         {this.createInputSearch()}
-        <div className="main-content">
-          <div className="categories">
+        <div className="main_content">
+          <div className="category_content">
             {this.createCategories()}
           </div>
           <div className="productList">
