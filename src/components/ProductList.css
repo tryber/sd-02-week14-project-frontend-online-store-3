@@ -1,3 +1,7 @@
+.empty_list {
+  text-align: center;
+}
+
 .product-list {
   display: flex;
   flex-wrap: wrap;
