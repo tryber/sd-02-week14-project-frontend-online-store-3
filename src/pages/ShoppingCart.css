@@ -27,8 +27,8 @@ body {
 
 .empty_content {
   display: flex;
+  height: 800px;
   justify-content: center;
-  height: 800px
 }
 
 .empty_content > img {

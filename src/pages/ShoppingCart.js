@@ -114,6 +114,7 @@ class ShoppingCart extends React.Component {
   }
 
   returnButton() {
+    this.totalCartItems();
     return (
       <div>
         <button
@@ -165,7 +166,6 @@ class ShoppingCart extends React.Component {
 
   render() {
     const { productsArr, isShouldRedirect, redirectPage } = this.state;
-    this.totalCartItems();
     localStorage.setItem('products', JSON.stringify(productsArr));
     if (isShouldRedirect) return <Redirect to={redirectPage} />;
     if (productsArr && (productsArr.length !== 0)) {
