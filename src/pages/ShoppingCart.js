@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import './ShoppingCart.css';
-import teste from '../imgs/carrinho-vazio.jpg';
+import emptyCart from '../imgs/carrinho-vazio.jpg';
 
 class ShoppingCart extends React.Component {
   constructor(props) {
@@ -191,7 +191,7 @@ class ShoppingCart extends React.Component {
       <div>
         {this.returnButton()}
         <div className="empty_content">
-          <img src={teste} alt="return button" />
+          <img src={emptyCart} alt="return button" />
         </div>
       </div>
     );
