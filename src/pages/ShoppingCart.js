@@ -1,16 +1,27 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import './ShoppingCart.css';
+import emptyCart from '../imgs/carrinho-vazio.jpg';
 
 class ShoppingCart extends React.Component {
   constructor(props) {
     super(props);
     const teste = JSON.parse(localStorage.getItem('products'));
     this.state = {
+      isShouldRedirect: false,
+      redirectPage: '',
       productsArr: teste,
     };
     this.removeFromCart = this.removeFromCart.bind(this);
     this.changeQuantity = this.changeQuantity.bind(this);
+    this.onChangeRedirect = this.onChangeRedirect.bind(this);
+  }
+
+  onChangeRedirect(string) {
+    this.setState({
+      isShouldRedirect: true,
+      redirectPage: string,
+    });
   }
 
   changeQuantity(value, id) {
@@ -102,6 +113,31 @@ class ShoppingCart extends React.Component {
     }
   }
 
+  returnButton() {
+    this.totalCartItems();
+    return (
+      <div>
+        <button
+          label="return"
+          type="button"
+          onClick={() => this.onChangeRedirect('/')}
+          className="return-button"
+        />
+      </div>
+    );
+  }
+
+  checkoutButton() {
+    this.value = 'Finalizar compra';
+    return (
+      <Link to="/checkout">
+        <button className="checkout_button" type="button">
+          {this.value}
+        </button>
+      </Link>
+    );
+  }
+
   totalPrice() {
     const { productsArr } = this.state;
     let totalPrice = productsArr.reduce((acc, cur) => {
@@ -129,13 +165,13 @@ class ShoppingCart extends React.Component {
   }
 
   render() {
-    const { productsArr } = this.state;
-    this.totalCartItems();
+    const { productsArr, isShouldRedirect, redirectPage } = this.state;
     localStorage.setItem('products', JSON.stringify(productsArr));
+    if (isShouldRedirect) return <Redirect to={redirectPage} />;
     if (productsArr && (productsArr.length !== 0)) {
       return (
         <div className="div_content">
-          <Link to="/"><span>Voltar</span></Link>
+          {this.returnButton()}
           <div className="div_container">
             <div>
               <h2>Carrinho de compras: </h2>
@@ -147,14 +183,16 @@ class ShoppingCart extends React.Component {
           <div className="div_container">
             {this.totalPrice()}
           </div>
-          <Link to="/checkout"><span>Finalizar compra</span></Link>
+          {this.checkoutButton()}
         </div>
       );
     }
     return (
       <div>
-        <Link to="/"><span>Voltar</span></Link>
-        <p className="empty_content">Carrinho vazio</p>
+        {this.returnButton()}
+        <div className="empty_content">
+          <img src={emptyCart} alt="return button" />
+        </div>
       </div>
     );
   }
