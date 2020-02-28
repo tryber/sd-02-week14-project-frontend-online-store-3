@@ -126,13 +126,14 @@ class ShoppingCart extends React.Component {
   }
 
   checkoutButton() {
+    this.value = 'Finalizar compra';
     return (
       <Link to="/checkout">
         <button className="checkout_button" type="button">
-          Finalizar compra
-            </button>
+          {this.value}
+        </button>
       </Link>
-    )
+    );
   }
 
   totalPrice() {
