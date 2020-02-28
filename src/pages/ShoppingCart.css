@@ -26,8 +26,13 @@ body {
 }
 
 .empty_content {
-  font-size: 30px;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  height: 800px
+}
+
+.empty_content > img {
+  align-self: center;
 }
 
 .flex_cart_container {
