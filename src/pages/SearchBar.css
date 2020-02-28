@@ -13,6 +13,7 @@ button {
 .category_content {
   border: 1px solid black;
   height: 700px;
+  padding-left: 20px;
   width: 300px;
 }
 

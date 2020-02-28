@@ -25,10 +25,16 @@ class ProductList extends Component {
   render() {
     const { products } = this.state;
     const { categoryId, query, totalItems } = this.props;
-    if (!products) return <div>Digite algum termo de pesquisa ou escolha uma categoria.</div>;
+    if (!products) {
+      return (
+        <h2 className="empty_list">
+          Digite algum termo de pesquisa ou escolha uma categoria.
+        </h2>
+      );
+    }
     return (
       <div className="product-list">
-        {products.map((product) =>
+        {products.map((product) => (
           <ProductItem
             totalItems={totalItems}
             title={product.title}
@@ -43,8 +49,8 @@ class ProductList extends Component {
             quantity={1}
             productInfo={{ categoryId, query }}
             key={product.id}
-          />,
-        )}
+          />
+        ))}
       </div>
     );
   }
