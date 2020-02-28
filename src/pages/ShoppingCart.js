@@ -125,6 +125,16 @@ class ShoppingCart extends React.Component {
     );
   }
 
+  checkoutButton() {
+    return (
+      <Link to="/checkout">
+        <button className="checkout_button" type="button">
+          Finalizar compra
+            </button>
+      </Link>
+    )
+  }
+
   totalPrice() {
     const { productsArr } = this.state;
     let totalPrice = productsArr.reduce((acc, cur) => {
@@ -171,11 +181,7 @@ class ShoppingCart extends React.Component {
           <div className="div_container">
             {this.totalPrice()}
           </div>
-          <Link to="/checkout">
-            <button className="checkout_button" type="button">
-              Finalizar compra
-            </button>
-          </Link>
+          {this.checkoutButton()}
         </div>
       );
     }
