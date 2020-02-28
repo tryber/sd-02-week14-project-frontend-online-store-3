@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import './ShoppingCart.css';
 
 class ShoppingCart extends React.Component {
@@ -7,10 +7,20 @@ class ShoppingCart extends React.Component {
     super(props);
     const teste = JSON.parse(localStorage.getItem('products'));
     this.state = {
+      isShouldRedirect: false,
+      redirectPage: '',
       productsArr: teste,
     };
     this.removeFromCart = this.removeFromCart.bind(this);
     this.changeQuantity = this.changeQuantity.bind(this);
+    this.onChangeRedirect = this.onChangeRedirect.bind(this);
+  }
+
+  onChangeRedirect(string) {
+    this.setState({
+      isShouldRedirect: true,
+      redirectPage: string,
+    });
   }
 
   changeQuantity(value, id) {
@@ -102,6 +112,19 @@ class ShoppingCart extends React.Component {
     }
   }
 
+  returnButton() {
+    return (
+      <div>
+        <button
+          label="return"
+          type="button"
+          onClick={() => this.onChangeRedirect('/')}
+          className="return-button"
+        />
+      </div>
+    );
+  }
+
   totalPrice() {
     const { productsArr } = this.state;
     let totalPrice = productsArr.reduce((acc, cur) => {
@@ -129,13 +152,14 @@ class ShoppingCart extends React.Component {
   }
 
   render() {
-    const { productsArr } = this.state;
+    const { productsArr, isShouldRedirect, redirectPage } = this.state;
     this.totalCartItems();
     localStorage.setItem('products', JSON.stringify(productsArr));
+    if (isShouldRedirect) return <Redirect to={redirectPage} />;
     if (productsArr && (productsArr.length !== 0)) {
       return (
         <div className="div_content">
-          <Link to="/"><span>Voltar</span></Link>
+          {this.returnButton()}
           <div className="div_container">
             <div>
               <h2>Carrinho de compras: </h2>
@@ -147,13 +171,13 @@ class ShoppingCart extends React.Component {
           <div className="div_container">
             {this.totalPrice()}
           </div>
-          <Link to="/checkout"><span>Finalizar compra</span></Link>
+          <Link to="/checkout"><button className="checkout_button" type="button">Finalizar compra</button></Link>
         </div>
       );
     }
     return (
       <div>
-        <Link to="/"><span>Voltar</span></Link>
+        {this.returnButton()}
         <p className="empty_content">Carrinho vazio</p>
       </div>
     );
