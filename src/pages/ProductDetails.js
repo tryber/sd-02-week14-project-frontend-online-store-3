@@ -59,7 +59,7 @@ class ProductDetails extends Component {
     const { product } = this.props.location.state;
     const { productCount } = this.state;
     const { totalItems } = this.state;
-    if (!localStorage.products) {
+    if (!localStorage.products || localStorage.products === 'null') {
       localStorage.setItem('totalItems', (totalItems + productCount));
       product.quantity += productCount - 1;
       localStorage.setItem('products', JSON.stringify([product]));

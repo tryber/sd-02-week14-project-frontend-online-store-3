@@ -25,13 +25,22 @@ class ProductList extends Component {
   render() {
     const { products } = this.state;
     const { categoryId, query, totalItems } = this.props;
-    if (!products) {
+    if (!products || products === []) {
       return (
         <h2 className="empty_list">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </h2>
       );
     }
+
+    if (products.length === 0) {
+      return (
+        <h2 className="empty_list">
+          Nenhum produto foi encontrado.
+        </h2>
+      );
+    }
+
     return (
       <div className="product-list">
         {products.map((product) => (
