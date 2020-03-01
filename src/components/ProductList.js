@@ -29,8 +29,7 @@ class ProductList extends Component {
       return (
         <h2 className="empty_list">Digite algum termo de pesquisa ou escolha uma categoria.</h2>
       );
-    }
-    if (products.length === 0) {
+    } if (products.length === 0) {
       return <h2 className="empty_list">Nenhum produto foi encontrado.</h2>;
     }
     return (
