@@ -42,7 +42,7 @@ class CustomerRating extends Component {
 
   saveRating() {
     const { email } = this.state;
-    const validEmailRegex = RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
+    const validEmailRegex = RegExp(/^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i);
     if (!email || !validEmailRegex.test(email)) return alert('Preencha com um e-mail válido');
     if (!localStorage.comments) {
       localStorage.setItem('comments', JSON.stringify([this.state]));
